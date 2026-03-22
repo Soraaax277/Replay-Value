@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Replay Value</title>
+  <link rel="icon" href="Images/Logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet" />
+  <script src="components.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="about-page">
+  <canvas id="glcanvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;"></canvas>
+  <div id="particles-container"></div>
+
+  <!-- ─── Navbar ─────────────────────────────────────── -->
+  <site-navbar></site-navbar>
+
+  <!-- ─── Hero / Rotating Business Card ──────────────── -->
+  <section class="about-hero-section">
+    <div class="card-container" id="card-container">
+      <div class="business-card" id="business-card">
+        <div class="card-face card-front">
+          <img src="Images/Business Card/Front.png" alt="Business Card Front" />
+        </div>
+        <div class="card-face card-back">
+          <img src="Images/Business Card/Back.png" alt="Business Card Back" />
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>[ scroll ]</span>
+      <div class="chevron"></div>
+    </div>
+  </section>
+
+  <!-- ─── Resume Sections ────────────────────────────── -->
+  <main class="about-content">
+    
+    <section class="about-block intro-block">
+      <h2>Hello, I am Marc-Ace Sora Edu.<br>I create <strong>Games, Shaders, VFX, Full-Stack Applications, and Music.</strong></h2>
+      <p>I am a multi-award-winning game developer and technical artist with a background in international competitive e-sports. From winning Global Game Jams to managing elite talent in the entertainment industry, I bridge the gap between complex C# logic and stunning visual storytelling. I value high-performance code, game feel, and technical precision.</p>
+    </section>
+
+    <section class="about-block">
+      <h3 class="block-heading">Why me? ↓</h3>
+      <div class="about-list">
+        <div class="list-item">
+          <h4>➔ Versatile Technical Artist Edge</h4>
+          <p>- I do not just code systems; I build the shaders and VFX that define the visual experience. I offer a rare blend of C# logic and VFX Graph expertise.</p>
+        </div>
+        <div class="list-item">
+          <h4>➔ Proven Award-Winning Track Record</h4>
+          <p>- Consistently recognized with Best Project distinctions in Game Programming and Production across multiple academic years.</p>
+        </div>
+        <div class="list-item">
+          <h4>➔ Pro-Player Perspective</h4>
+          <p>- As a former international competitor under the name Sora, I understand game balance, mechanics, and player psychology from a high-level perspective.</p>
+        </div>
+        <div class="list-item">
+          <h4>➔ Full-Stack Capability</h4>
+          <p>- Experienced in building diverse digital solutions, from restaurant-themed web applications to SQL-backed mobile platforms.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-block">
+      <h3 class="block-heading">What do I know? ↓</h3>
+      <div class="skills-tabs">
+        <span>Game Development</span>
+        <span>Technical Art</span>
+        <span>Music Production</span>
+        <span>Web Development</span>
+        <span>Video Editing</span>
+        <span>Account Management</span>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-box"><span>Unity</span></div>
+        <div class="skill-box"><span>C#</span></div>
+        <div class="skill-box"><span>Shader Graph</span></div>
+        <div class="skill-box"><span>VFX Graph</span></div>
+        <div class="skill-box"><span>Blender</span></div>
+        <div class="skill-box"><span>Aseprite</span></div>
+        <div class="skill-box"><span>FL Studio</span></div>
+        <div class="skill-box"><span>SQL</span></div>
+        <div class="skill-box"><span>Swift</span></div>
+        <div class="skill-box"><span>HTML</span></div>
+        <div class="skill-box"><span>CSS</span></div>
+        <div class="skill-box"><span>JS</span></div>
+        <div class="skill-box"><span>Premiere Pro</span></div>
+        <div class="skill-box"><span>Zendesk</span></div>
+        <div class="skill-box"><span>Salesforce</span></div>
+      </div>
+    </section>
+
+    <section class="about-block">
+      <h3 class="block-heading">Where Have I Put My Skills to Work? ↓</h3>
+      <div class="about-list">
+        <div class="list-item">
+          <h4>➔ Top Dawgs Management (2024 - Present)</h4>
+          <p>- Executive Virtual Assistant and Talent Manager</p>
+          <p>- Handling digital presence and fan engagement for Lily Brooks O'Briant, Rachel Pizzolato, and supcaitlin.</p>
+        </div>
+        <div class="list-item">
+          <h4>➔ King’s Rival (2020 - 2022)</h4>
+          <p>- Community Manager and Competitive Athlete (Sora)</p>
+          <p>- Represented the Philippines in international e-sports tournaments in Vietnam.</p>
+        </div>
+        <div class="list-item">
+          <h4>➔ Acquire Asia Inc. (2023)</h4>
+          <p>- B2B Sales and Customer Support</p>
+          <p>- Handled high-stakes commercial accounts, fraud detection, and financial profiling.</p>
+        </div>
+        <div class="list-item">
+          <h4>➔ Professional Freelance Editor (2017 - 2023)</h4>
+          <p>- Video Editor and Post-Production Artist</p>
+          <p>- Six years of experience creating short-form and long-form content for diverse global clients.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-block">
+      <h3 class="block-heading">What have I managed to pull off? ↓</h3>
+      <div class="about-list">
+        <div class="list-item">
+          <h4>➔ Top 1 and Best Project: CustomerID (2025-2026)</h4>
+          <p>- Awarded at NeoNode and Game Programming 1 and 2 for technical excellence in Unity development.</p>
+        </div>
+        <div class="list-item">
+          <h4>➔ Second Place: Global Game Jam (2025)</h4>
+          <p>- Developed Mask-A-Raid under 48-hour constraints, focusing on innovative mechanics and game feel.</p>
+        </div>
+        <div class="list-item">
+          <h4>➔ Second Place: CIIT CEScon (2026)</h4>
+          <p>- Developed Nestly, a student-housing application addressing real-world logistics and UX challenges.</p>
+        </div>
+        <div class="list-item">
+          <h4>➔ Best Project: Pacific Crossing (2024)</h4>
+          <p>- Awarded for a high-complexity restaurant-themed ordering application in Computer Programming 2.</p>
+        </div>
+        <div class="list-item">
+          <h4>➔ CIIT Gold Weave and Dean’s List (2023-2026)</h4>
+          <p>- Consistently maintained top academic standing while working professionally in the industry.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-block">
+      <h3 class="block-heading">Where Did I Learn This Stuff? ↓</h3>
+      <div class="about-list">
+        <div class="list-item">
+          <h4>➔ Bachelor of Science in Entertainment and Multimedia Computing (2023 - Current)</h4>
+          <p>- CIIT College of Arts and Technology</p>
+        </div>
+        <div class="list-item">
+          <h4>➔ Bachelor of Science in Architecture (2020 - 2022)</h4>
+          <p>- Technological Institute of the Philippines</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ─── Dynamic Clock Section ────────────────────────── -->
+  <section class="clock-section">
+    <div class="clock-glow"></div>
+    <div class="clock-circle">
+      <p class="clock-eyebrow">My Current Local Time</p>
+      <h2 class="clock-time">
+        <div id="time-val">--:--</div>
+        <div id="time-ampm">--</div>
+      </h2>
+      <p id="local-status" class="clock-status" style="width: 85%; margin: 0 auto; line-height: 1.4;">I am likely in the studio or in-game; I look forward to connecting with you.</p>
+    </div>
+  </section>
+
+  <!-- ─── Footer ─────────────────────────────────────── -->
+  <site-footer></site-footer>
+
+  <script>
+    /* ─── Particles Init ────────────────────────────── */
+    const pContainer = document.getElementById('particles-container');
+    const PARTICLE_COUNT = 80;
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.top = Math.random() * 100 + 'vh';
+      const dur = 4 + Math.random() * 6;
+      const delay = Math.random() * 8;
+      const size = Math.random() * 2 + 1;
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.animation = `particleFloat ${dur}s linear ${delay}s infinite`;
+      pContainer.appendChild(p);
+    }
+    
+    /* ─── Navbar Scroll Effect ──────────────────────── */
+    const navbar = document.getElementById('navbar');
+    let scrollHideTimer = null;
+    window.addEventListener('scroll', () => {
+      if(navbar) {
+        navbar.classList.toggle('scrolled', window.scrollY > 10);
+        if (window.scrollY > 50) navbar.classList.add('hidden');
+        else navbar.classList.remove('hidden');
+
+        clearTimeout(scrollHideTimer);
+        scrollHideTimer = setTimeout(() => {
+          navbar.classList.remove('hidden');
+        }, 1500);
+      }
+
+      // Hide hero on scroll
+      const hero = document.querySelector('.about-hero-section');
+      if (hero) {
+        const opacity = 1 - (window.scrollY / (window.innerHeight * 0.5));
+        hero.style.opacity = Math.max(0, opacity);
+        hero.style.pointerEvents = opacity <= 0 ? 'none' : 'auto';
+      }
+    }, { passive: true });
+
+    /* ─── WebGL Liquid Orange & Purple Shader ────────── */
+    const canvas = document.getElementById('glcanvas');
+    if (canvas) {
+      const gl = canvas.getContext('webgl');
+      
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      const vsSource = `
+        attribute vec4 aVertexPosition;
+        void main() {
+          gl_Position = aVertexPosition;
+        }
+      `;
+
+      const fsSource = `
+        precision highp float;
+        uniform vec2 u_resolution;
+        uniform float u_time;
+
+        vec2 hash(vec2 p) {
+          p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
+          return -1.0 + 2.0 * fract(sin(p) * 43758.5453123);
+        }
+
+        float noise(vec2 p) {
+          const float K1 = 0.366025404;
+          const float K2 = 0.211324865;
+          vec2 i = floor(p + (p.x + p.y) * K1);
+          vec2 a = p - i + (i.x + i.y) * K2;
+          float m = step(a.y, a.x);
+          vec2 o = vec2(m, 1.0 - m);
+          vec2 b = a - o + K2;
+          vec2 c = a - 1.0 + 2.0 * K2;
+          vec3 h = max(0.5 - vec3(dot(a,a), dot(b,b), dot(c,c)), 0.0);
+          vec3 n = h*h*h*h * vec3(dot(a, hash(i+0.0)), dot(b, hash(i+o)), dot(c, hash(i+1.0)));
+          return dot(n, vec3(70.0));
+        }
+
+        float fbm(vec2 uv) {
+          float f = 0.0;
+          mat2 m = mat2(1.6, 1.2, -1.2, 1.6);
+          f += 0.5000 * noise(uv); uv = m * uv;
+          f += 0.2500 * noise(uv); uv = m * uv;
+          f += 0.1250 * noise(uv); uv = m * uv;
+          f += 0.0625 * noise(uv); uv = m * uv;
+          return f;
+        }
+
+        void main() {
+          vec2 st = gl_FragCoord.xy / u_resolution.y;
+          
+          vec2 q = vec2(0.);
+          q.x = fbm(st + 0.02 * u_time);
+          q.y = fbm(st + vec2(1.0));
+          
+          vec2 r = vec2(0.);
+          r.x = fbm(st + 1.0 * q + vec2(1.7, 9.2) + 0.12 * u_time);
+          r.y = fbm(st + 1.0 * q + vec2(8.3, 2.8) + 0.10 * u_time);
+          
+          float f = fbm(st + r);
+          
+          // Throttled high threshold bounds the gold generation strongly (20% gold)
+          float veins = abs(sin(f * 3.0 + u_time * 0.3));
+          veins = smoothstep(0.93, 1.0, veins); 
+          
+          // Auxiliary veins thinned further
+          float faintVeins = smoothstep(0.85, 1.0, abs(sin(f * 6.0 - u_time * 0.1))) * 0.2;
+          // Global fluid intensity mapping
+          float fluid = veins + faintVeins;
+          
+          vec3 baseColor = vec3(0.01, 0.01, 0.01);
+          vec3 orangeColor = vec3(1.0, 0.4, 0.0);
+          vec3 purpleColor = vec3(0.6, 0.1, 0.9);
+          
+          vec3 col = mix(baseColor, orangeColor, fluid);
+          col = mix(col, purpleColor, smoothstep(0.97, 1.0, abs(sin(f * 3.0 + u_time * 0.3))));
+          
+          // Global black tone-down filter multiplying contrast uniformly
+          col *= 0.45;
+          
+          vec2 center = gl_FragCoord.xy / u_resolution.xy - 0.5;
+          col *= 1.0 - dot(center, center) * 1.5;
+          
+          gl_FragColor = vec4(col, 1.0);
+        }
+      `;
+
+      function loadShader(gl, type, source) {
+        const shader = gl.createShader(type);
+        gl.shaderSource(shader, source);
+        gl.compileShader(shader);
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+          console.error(gl.getShaderInfoLog(shader));
+          gl.deleteShader(shader);
+          return null;
+        }
+        return shader;
+      }
+
+      const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vsSource);
+      const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
+      const shaderProgram = gl.createProgram();
+      gl.attachShader(shaderProgram, vertexShader);
+      gl.attachShader(shaderProgram, fragmentShader);
+      gl.linkProgram(shaderProgram);
+      gl.useProgram(shaderProgram);
+
+      const positionBuffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+      const positions = [ -1.0, 1.0, 1.0, 1.0, -1.0, -1.0, 1.0, -1.0 ];
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+      const vertexPosition = gl.getAttribLocation(shaderProgram, 'aVertexPosition');
+      gl.vertexAttribPointer(vertexPosition, 2, gl.FLOAT, false, 0, 0);
+      gl.enableVertexAttribArray(vertexPosition);
+
+      const uResolution = gl.getUniformLocation(shaderProgram, 'u_resolution');
+      const uTime = gl.getUniformLocation(shaderProgram, 'u_time');
+      
+      let startTime = Date.now();
+      function renderGL() {
+        gl.uniform2f(uResolution, canvas.width, canvas.height);
+        gl.uniform1f(uTime, (Date.now() - startTime) / 1000.0);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+        requestAnimationFrame(renderGL);
+      }
+      renderGL();
+    }
+
+    /* ─── Dynamic Clock (PHT Time Zone) ─────────────── */
+    const timeValDisplay = document.getElementById('time-val');
+    const timeAmPmDisplay = document.getElementById('time-ampm');
+    const statusDisplay = document.getElementById('local-status');
+
+    function updateClock() {
+      const now = new Date();
+      // Format 04:11 AM
+      const optionsTime = { timeZone: 'Asia/Manila', hour: '2-digit', minute: '2-digit', hour12: true };
+      const timeString = new Intl.DateTimeFormat('en-US', optionsTime).format(now);
+      
+      // Split into "04:11" and "AM"
+      const partsArr = timeString.split(' ');
+      if (partsArr.length === 2 && timeValDisplay && timeAmPmDisplay) {
+        timeValDisplay.textContent = partsArr[0];
+        timeAmPmDisplay.textContent = partsArr[1];
+      }
+
+      // Status display is now statically handled in HTML
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    /* ─── 3D Rotating Business Card (Lerp Physics) ──── */
+    const container = document.getElementById('card-container');
+    const card = document.getElementById('business-card');
+    
+    let isFlipped = false;
+    let targetRotateX = 0;
+    let targetRotateY = 0;
+    let currentRotateX = 0;
+    let currentRotateY = 0;
+    
+    const maxRotateX = 15; 
+    const maxRotateY = 15;
+
+    container.addEventListener('mousemove', (e) => {
+      const rect = container.getBoundingClientRect();
+      const x = e.clientX - rect.left; 
+      const y = e.clientY - rect.top; 
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      let rY = ((x - centerX) / centerX) * maxRotateY; 
+      let rX = -((y - centerY) / centerY) * maxRotateX;
+      
+      if (isFlipped) {
+        rY += 180;
+      }
+      
+      targetRotateY = rY;
+      targetRotateX = rX;
+    });
+
+    container.addEventListener('mouseleave', () => {
+      targetRotateX = 0;
+      targetRotateY = isFlipped ? 180 : 0;
+    });
+
+    container.addEventListener('click', () => {
+      isFlipped = !isFlipped;
+      targetRotateX = 0;
+      targetRotateY = isFlipped ? 180 : 0;
+      container.classList.toggle('flipped', isFlipped);
+    });
+
+    function lerp(start, end, amt) {
+      return (1 - amt) * start + amt * end;
+    }
+
+    function animateCard() {
+      currentRotateX = lerp(currentRotateX, targetRotateX, 0.1);
+      currentRotateY = lerp(currentRotateY, targetRotateY, 0.1);
+      
+      if (card) {
+        card.style.transform = `rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg)`;
+      }
+      requestAnimationFrame(animateCard);
+    }
+    animateCard();
+
+  </script>
+</body>
+</html>

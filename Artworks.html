@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Replay Value</title>
+  <link rel="icon" href="Images/Logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet" />
+  <script src="components.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="glcanvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;"></canvas>
+  <div id="particles-container"></div>
+
+  <!-- ─── Navbar ─────────────────────────────────────── -->
+  <site-navbar></site-navbar>
+
+  <!-- ─── Header ─────────────────────────────────────── -->
+  <site-hero-slideshow title="ARTWORKS HUB" subtitle="Explore my visual art, intricate photography, and dynamic music compositions."></site-hero-slideshow>
+
+  <!-- ─── Artworks Categories Grid ───────────────────── -->
+  <main class="section-container" style="padding-top: 20px;">
+    <div class="art-category-wrapper">
+      
+      <!-- Photography Category -->
+      <div class="art-category">
+        <button class="cat-banner-btn" aria-expanded="false" data-target="cat-photography">
+          <div class="cat-banner-bg" style="background-image: url('Images/Portfolio/Artworks/Photography/Wing Gundam/IMG_0908.jpg');"></div>
+          <div class="cat-banner-overlay"></div>
+          <h2 class="cat-banner-title">PHOTOGRAPHY</h2>
+        </button>
+        <div class="cat-content" id="cat-photography">
+          <div class="cat-inner-list" id="grid-photography">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Art Category -->
+      <div class="art-category">
+        <button class="cat-banner-btn" aria-expanded="false" data-target="cat-art">
+          <div class="cat-banner-bg" style="background-image: url('Images/Portfolio/Artworks/Art/Inktober 2025.jpg');"></div>
+          <div class="cat-banner-overlay"></div>
+          <h2 class="cat-banner-title">DIGITAL & TRADITIONAL ART</h2>
+        </button>
+        <div class="cat-content" id="cat-art">
+          <div class="cat-inner-grid" id="grid-art">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Audio Category -->
+      <div class="art-category">
+        <button class="cat-banner-btn" aria-expanded="false" data-target="cat-audio">
+          <div class="cat-banner-bg" style="background-image: url('Images/Portfolio/Artworks/Audio/thumb_80s_BGM_2.png'); background-position: center; background-size: cover;"></div>
+          <div class="cat-banner-overlay"></div>
+          <h2 class="cat-banner-title">AUDIO & MUSIC</h2>
+        </button>
+        <div class="cat-content" id="cat-audio">
+          <div class="cat-inner-audio" id="grid-audio">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- VFX Category -->
+      <div class="art-category">
+        <button class="cat-banner-btn" aria-expanded="false" data-target="cat-vfx">
+          <div class="cat-banner-bg">
+            <video src="Images/Portfolio/Artworks/VFX/EDU_Lightning.mp4" autoplay loop muted playsinline></video>
+          </div>
+          <div class="cat-banner-overlay"></div>
+          <h2 class="cat-banner-title">VFX (Unity 6)</h2>
+        </button>
+        <div class="cat-content" id="cat-vfx">
+          <div class="cat-inner-grid" id="grid-vfx">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ─── Footer ─────────────────────────────────────── -->
+  <site-footer></site-footer>
+
+  <!-- ─── Lightbox Overlay ───────────────────────────── -->
+  <div id="lightbox" class="lightbox">
+    <button id="lightbox-close" class="lightbox-close" aria-label="Close Lightbox">&times;</button>
+    <img id="lightbox-img" src="" alt="Expanded Artwork" />
+  </div>
+
+  <!-- ─── VFX Details Modal ──────────────────────────── -->
+  <div id="vfx-modal" class="game-modal" aria-modal="true" role="dialog">
+    <div class="game-modal-content">
+      <button class="modal-close" id="modal-vfx-close" aria-label="Close Modal">&times;</button>
+      <div class="modal-hero">
+        <div class="modal-main-display" id="modal-vfx-display">
+          <div class="modal-video-wrap" id="modal-vfx-video-wrap" style="width:100%; height:100%;"></div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-info-left" style="flex:1;">
+          <h2 id="modal-vfx-title" class="modal-title">VFX TITLE</h2>
+          <p id="modal-vfx-desc" class="modal-desc">Created in Unity 6 using VFX Graph.</p>
+        </div>
+        <div class="modal-info-right" style="width: auto; min-width: 150px;">
+          <div class="meta-block"><h4>YEAR</h4><p id="modal-vfx-year">2025</p></div>
+          <div class="meta-block"><h4>TOOLS</h4><p id="modal-vfx-tools">Unity 6, VFX Graph</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ─── Artwork Data ──────────────────────────────── */
+    const artworksData = {
+      photography: {
+        "00 Qan(T)": ["IMG_0943.jpg", "IMG_0948.jpg", "IMG_0958.jpg"],
+        "God Gundam": ["IMG_9287.jpg", "IMG_9301.jpg", "IMG_9302.jpg"],
+        "Gundam Aerial": ["IMG_7726.jpg", "IMG_7736.jpg", "IMG_7750.jpg"],
+        "Gundam Bael": ["IMG_1207.jpg", "IMG_1208.jpg"],
+        "Gundam Calibarn": ["IMG_6768.jpg", "IMG_6790.jpg", "IMG_6797.jpg"],
+        "Liber Bishop": ["IMG_5994.jpg", "IMG_6032.jpg"],
+        "RX 78 (G)E Gundam Ex": ["IMG_5482.jpg", "IMG_5483.jpg"],
+        "RX 93 Gundam Nu": ["IMG_1240.jpg", "IMG_1256.jpg", "IMG_1262.jpg"],
+        "Wing Gundam": ["IMG_0847.jpg", "IMG_0854.jpg", "IMG_0903.jpg", "IMG_0908.jpg"]
+      },
+      art: [
+        "Inktober 2025.jpg", "Inktober Frog.jpg", "Inktober Monster.jpg", "Inktober No Face.jpg",
+        "Inktober Snake.jpg", "Inktober Tanjiro.jpg", "Inktober.jpg",
+        "MAP of redsoul wall.png", "Under My Blanket Dital Art.jpg", "Under My Blanket Traditional.jpg"
+      ],
+      audio: [
+        { file: "80s_BGM_2.mp3", thumb: "thumb_80s_BGM_2.png", title: "80s BGM" },
+        { file: "Nico.mp3", thumb: "thumb_Nico.png", title: "Nico Acoustic" },
+        { file: "Nico2.mp3", thumb: "thumb_Nico2.png", title: "Nico Lofi" },
+        { file: "Retro_BGM_2.mp3", thumb: "thumb_Retro_BGM_2.png", title: "Retro Arcade BGM" },
+        { file: "Rizal_BGM.mp3", thumb: "thumb_Rizal_BGM.png", title: "Rizal Epic Monument" }
+      ],
+      vfx: [
+        { file: "EDU_Activity2_Fireworks.mp4", title: "Fireworks Activity" },
+        { file: "EDU_Explosion.mov", title: "Dynamic Explosion" },
+        { file: "EDU_Fireworks.mp4", title: "Fireworks VFX" },
+        { file: "EDU_Lightning.mp4", title: "Procedural Lightning" },
+        { file: "EDU_LightningVFXGraph.mp4", title: "VFX Graph System" }
+      ]
+    };
+
+    /* ─── Populate Grids ────────────────────────────── */
+    const photoGrid = document.getElementById('grid-photography');
+    const artGrid = document.getElementById('grid-art');
+    const audioGrid = document.getElementById('grid-audio');
+    const vfxGrid = document.getElementById('grid-vfx');
+
+    // Populate Photography (Nested Categorized)
+    Object.keys(artworksData.photography).forEach((categoryName, index) => {
+      // 1. Create a wrapper for the sub-category
+      const subCatWrap = document.createElement('div');
+      subCatWrap.className = 'sub-category-wrap';
+      
+      const subCatId = 'photo-cat-' + index;
+
+      // 2. Create the sub-category toggle banner
+      const firstImg = artworksData.photography[categoryName][0];
+      const subCatBtn = document.createElement('button');
+      subCatBtn.className = 'cat-banner-btn sub-cat-banner-btn';
+      subCatBtn.setAttribute('aria-expanded', 'false');
+      subCatBtn.setAttribute('data-target', subCatId);
+      subCatBtn.innerHTML = `
+        <div class="cat-banner-bg" style="background-image: url('Images/Portfolio/Artworks/Photography/${categoryName}/${firstImg}');"></div>
+        <div class="cat-banner-overlay"></div>
+        <h3 class="cat-banner-title sub-cat-title-text">${categoryName}</h3>
+        <span class="sub-cat-icon">+</span>
+      `;
+      
+      // 3. Create the inner grid container to hold the images
+      const subCatContent = document.createElement('div');
+      subCatContent.className = 'sub-cat-content';
+      subCatContent.id = subCatId;
+
+      const innerGrid = document.createElement('div');
+      innerGrid.className = 'sub-cat-grid';
+
+      // 4. Populate images for this sub-category
+      const files = artworksData.photography[categoryName];
+      files.forEach(file => {
+        const imgWrap = document.createElement('div');
+        imgWrap.className = 'art-item';
+        const displayName = file.split('.')[0];
+        // Path adjusted to point to the specific sub-folder
+        imgWrap.innerHTML = `
+          <img src="Images/Portfolio/Artworks/Photography/${categoryName}/${file}" alt="${categoryName} - ${displayName}" loading="lazy" class="zoomable-img" />
+          <div class="art-info">
+            <span class="art-name">${displayName}</span>
+          </div>
+        `;
+        innerGrid.appendChild(imgWrap);
+      });
+
+      subCatContent.appendChild(innerGrid);
+      subCatWrap.appendChild(subCatBtn);
+      subCatWrap.appendChild(subCatContent);
+      photoGrid.appendChild(subCatWrap);
+    });
+
+    // Populate Art
+    artworksData.art.forEach(file => {
+      const imgWrap = document.createElement('div');
+      imgWrap.className = 'art-item';
+      
+      // Prettify name: Remove extension and replace dashes/underscores with spaces
+      const displayName = file.split('.')[0];
+
+      imgWrap.innerHTML = `
+        <img src="Images/Portfolio/Artworks/Art/${file}" alt="${displayName}" loading="lazy" class="zoomable-img" />
+        <div class="art-info">
+          <span class="art-name">${displayName}</span>
+        </div>
+      `;
+      artGrid.appendChild(imgWrap);
+    });
+
+    // Populate Audio
+    artworksData.audio.forEach(audioObj => {
+      const item = document.createElement('div');
+      item.className = 'audio-item';
+      
+      item.innerHTML = `
+        <div class="audio-thumb-wrap">
+          <img src="Images/Portfolio/Artworks/Audio/${audioObj.thumb}" alt="${audioObj.title}" loading="lazy" />
+          <div class="audio-overlay">
+            <span class="audio-icon">▶ PLAYING</span>
+          </div>
+        </div>
+        <h3 class="audio-title">${audioObj.title}</h3>
+        <audio class="hidden-audio" src="Images/Portfolio/Artworks/Audio/${audioObj.file}" preload="none"></audio>
+      `;
+
+      // Hover to play logic
+      const audioElement = item.querySelector('.hidden-audio');
+      
+      item.addEventListener('mouseenter', () => {
+        item.classList.add('playing');
+        audioElement.play().catch(e => console.log('Audio play prevented', e));
+      });
+
+      item.addEventListener('mouseleave', () => {
+        item.classList.remove('playing');
+        audioElement.pause();
+        audioElement.currentTime = 0; // Reset
+      });
+
+      audioGrid.appendChild(item);
+    });
+
+    // Populate VFX
+    artworksData.vfx.forEach(vfxObj => {
+      const item = document.createElement('div');
+      item.className = 'art-item vfx-item';
+      item.onclick = (e) => {
+        // Since there's no specific artwork modal here, we'll reuse the lightbox if it's an image,
+        // but for VFX (videos), we might need a video modal or just show them in the grid.
+        // The user mentioned a "pop up will appear" just like in the games.
+      };
+
+      item.innerHTML = `
+        <div class="hub-video-wrap" style="border-radius: 8px; overflow: hidden; aspect-ratio: 16/9; background:#000;">
+          <video src="Images/Portfolio/Artworks/VFX/${vfxObj.file}" autoplay loop muted playsinline style="width:100%; height:100%; object-fit:cover; pointer-events:none;"></video>
+          <div class="art-info">
+            <span class="art-name">${vfxObj.title}</span>
+          </div>
+        </div>
+      `;
+      vfxGrid.appendChild(item);
+    });
+
+    /* ─── Banner & Sub-Category Dropdowns ─────────────── */
+    const allAccordions = document.querySelectorAll('.cat-banner-btn, .sub-cat-btn');
+    
+    // Delegate clicks for dynamically created sub-cat-btns as well
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.cat-banner-btn') || e.target.closest('.sub-cat-btn');
+      if (!btn) return;
+
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', !isExpanded);
+      
+      // Toggle icon
+      const icon = btn.querySelector('.cat-icon, .sub-cat-icon');
+      if (icon) icon.textContent = isExpanded ? '+' : '-';
+
+      const targetId = btn.getAttribute('data-target');
+      const content = document.getElementById(targetId);
+      
+      if (!content) return;
+
+      if (!isExpanded) {
+        content.style.maxHeight = content.scrollHeight + "px";
+        
+        // If this is a main banner opening, ensure sub-content isn't restricted by parent parent sizing
+        setTimeout(() => {
+          content.style.maxHeight = "none"; 
+        }, 400); 
+
+        // If this is a SUB-category opening, we must ALSO seamlessly expand the PARENT category bounds!
+        const parentContent = btn.closest('.cat-content');
+        if (parentContent && parentContent.style.maxHeight !== 'none') {
+          // Temporarily force max-height to none so it grows with the child naturally
+          parentContent.style.maxHeight = 'none';
+        }
+      } else {
+        // We are closing
+        // First constrain it to exact pixel height so transition runs
+        content.style.maxHeight = content.scrollHeight + "px";
+        // Trigger reflow
+        content.offsetHeight;
+        // Then shrink to 0
+        content.style.maxHeight = "0";
+      }
+    });
+
+    /* ─── VFX Modal Logic ────────────────────────────── */
+    const vfxModal = document.getElementById('vfx-modal');
+    const vfxVideoWrap = document.getElementById('modal-vfx-video-wrap');
+    
+    document.addEventListener('click', e => {
+      const artItem = e.target.closest('.art-item');
+      if (artItem && artItem.parentElement.id === 'grid-vfx') {
+        // Find which VFX it is
+        const name = artItem.querySelector('.art-name').textContent;
+        const vfxObj = artworksData.vfx.find(v => v.title === name);
+        if (vfxObj) {
+          document.getElementById('modal-vfx-title').textContent = vfxObj.title;
+          vfxVideoWrap.innerHTML = `<video src="Images/Portfolio/Artworks/VFX/${vfxObj.file}" controls autoplay loop style="width:100%; height:100%; object-fit:contain; background:#000;"></video>`;
+          vfxModal.classList.add('show');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+    });
+
+    document.querySelectorAll('.modal-close').forEach(btn => {
+      btn.onclick = () => {
+        vfxModal.classList.remove('show');
+        document.body.style.overflow = '';
+        vfxVideoWrap.innerHTML = '';
+      };
+    });
+
+    /* ─── Lightbox JS ──────────────────────────────────── */
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    document.querySelectorAll('.zoomable-img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    const closeLightbox = () => {
+      lightbox.classList.remove('show');
+      document.body.style.overflow = '';
+      setTimeout(() => { lightboxImg.src = ''; }, 300);
+    };
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && lightbox.classList.contains('show')) closeLightbox();
+    });
+
+    /* ─── Particles Init ────────────────────────────── */
+    const pContainer = document.getElementById('particles-container');
+    const PARTICLE_COUNT = 80;
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.top = Math.random() * 100 + 'vh';
+      const dur = 4 + Math.random() * 6;
+      const delay = Math.random() * 8;
+      const size = Math.random() * 2 + 1;
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.animation = `particleFloat ${dur}s linear ${delay}s infinite`;
+      pContainer.appendChild(p);
+    }
+    
+    /* ─── Navbar Scroll Effect ──────────────────────── */
+    const navbar = document.getElementById('navbar');
+    let scrollHideTimer = null;
+    window.addEventListener('scroll', () => {
+      if(navbar) {
+        navbar.classList.toggle('scrolled', window.scrollY > 10);
+        if (window.scrollY > 50) navbar.classList.add('hidden');
+        else navbar.classList.remove('hidden');
+
+        clearTimeout(scrollHideTimer);
+        scrollHideTimer = setTimeout(() => {
+          navbar.classList.remove('hidden');
+        }, 1500);
+      }
+    }, { passive: true });
+    /* ─── WebGL Liquid Shader (Black, Orange, Purple) ─ */
+    const canvas = document.getElementById('glcanvas');
+    if (canvas) {
+      const gl = canvas.getContext('webgl');
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+      const vsSource = `attribute vec4 aVertexPosition; void main() { gl_Position = aVertexPosition; }`;
+      const fsSource = `
+        precision highp float;
+        uniform vec2 u_resolution;
+        uniform float u_time;
+        vec2 hash(vec2 p) {
+          p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
+          return -1.0 + 2.0 * fract(sin(p) * 43758.5453123);
+        }
+        float noise(vec2 p) {
+          const float K1 = 0.366025404; const float K2 = 0.211324865;
+          vec2 i = floor(p + (p.x + p.y) * K1); vec2 a = p - i + (i.x + i.y) * K2;
+          float m = step(a.y, a.x); vec2 o = vec2(m, 1.0 - m);
+          vec2 b = a - o + K2; vec2 c = a - 1.0 + 2.0 * K2;
+          vec3 h = max(0.5 - vec3(dot(a,a), dot(b,b), dot(c,c)), 0.0);
+          vec3 n = h*h*h*h * vec3(dot(a, hash(i+0.0)), dot(b, hash(i+o)), dot(c, hash(i+1.0)));
+          return dot(n, vec3(70.0));
+        }
+        float fbm(vec2 uv) {
+          float f = 0.0; mat2 m = mat2(1.6, 1.2, -1.2, 1.6);
+          f += 0.5000 * noise(uv); uv = m * uv; f += 0.2500 * noise(uv); uv = m * uv;
+          f += 0.1250 * noise(uv); uv = m * uv; f += 0.0625 * noise(uv); uv = m * uv;
+          return f;
+        }
+        void main() {
+          vec2 st = gl_FragCoord.xy / u_resolution.y;
+          vec2 q = vec2(0.); q.x = fbm(st + 0.02 * u_time); q.y = fbm(st + vec2(1.0));
+          vec2 r = vec2(0.);
+          r.x = fbm(st + 1.0 * q + vec2(1.7, 9.2) + 0.12 * u_time);
+          r.y = fbm(st + 1.0 * q + vec2(8.3, 2.8) + 0.10 * u_time);
+          float f = fbm(st + r);
+          float veins = abs(sin(f * 3.0 + u_time * 0.3));
+          veins = smoothstep(0.93, 1.0, veins); 
+          float faintVeins = smoothstep(0.85, 1.0, abs(sin(f * 6.0 - u_time * 0.1))) * 0.2;
+          float fluid = veins + faintVeins;
+          vec3 baseColor = vec3(0.01, 0.01, 0.01);
+          vec3 orangeColor = vec3(1.0, 0.4, 0.0);
+          vec3 purpleColor = vec3(0.6, 0.1, 0.9);
+          vec3 col = mix(baseColor, orangeColor, fluid);
+          col = mix(col, purpleColor, smoothstep(0.97, 1.0, abs(sin(f * 3.0 + u_time * 0.3))));
+          col *= 0.55; 
+          vec2 center = gl_FragCoord.xy / u_resolution.xy - 0.5;
+          col *= 1.0 - dot(center, center) * 1.5;
+          gl_FragColor = vec4(col, 1.0);
+        }
+      `;
+      function loadShader(gl, type, source) {
+        const shader = gl.createShader(type); gl.shaderSource(shader, source); gl.compileShader(shader);
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) return null;
+        return shader;
+      }
+      const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vsSource);
+      const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
+      const shaderProgram = gl.createProgram();
+      gl.attachShader(shaderProgram, vertexShader); gl.attachShader(shaderProgram, fragmentShader);
+      gl.linkProgram(shaderProgram); gl.useProgram(shaderProgram);
+      const positionBuffer = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+      const positions = [ -1.0, 1.0, 1.0, 1.0, -1.0, -1.0, 1.0, -1.0 ];
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+      const vertexPosition = gl.getAttribLocation(shaderProgram, 'aVertexPosition');
+      gl.vertexAttribPointer(vertexPosition, 2, gl.FLOAT, false, 0, 0); gl.enableVertexAttribArray(vertexPosition);
+      const uResolution = gl.getUniformLocation(shaderProgram, 'u_resolution'); const uTime = gl.getUniformLocation(shaderProgram, 'u_time');
+      let startTime = Date.now();
+      function renderGL() {
+        gl.uniform2f(uResolution, canvas.width, canvas.height); gl.uniform1f(uTime, (Date.now() - startTime) / 1000.0);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); requestAnimationFrame(renderGL);
+      }
+      renderGL();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Replay Value</title>
+  <link rel="icon" href="Images/Logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet" />
+  <script src="components.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="glcanvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;"></canvas>
+  <div id="particles-container"></div>
+
+  <!-- ─── Navbar ─────────────────────────────────────── -->
+  <site-navbar></site-navbar>
+
+  <!-- ─── Slideshow Hero ─────────────────────────────── -->
+  <site-hero-slideshow title="WEBSITES HUB" subtitle="Explore my web and mobile application concepts and developments."></site-hero-slideshow>
+
+  <!-- ─── Websites Grid ──────────────────────────────── -->
+  <main class="section-container" style="padding-top: 20px; padding-bottom: 80px;">
+    <div class="websites-grid">
+      
+      <!-- Nestly (Portrait) -->
+      <article class="website-card grid-nestly" tabindex="0" data-website="nestly">
+        <video src="Images/Portfolio/Websites/Nestly App.mp4" autoplay loop muted playsinline class="site-media"></video>
+        <div class="site-overlay">
+          <h3>Nestly App</h3>
+          <p>Mobile Application</p>
+        </div>
+      </article>
+
+      <!-- Tequila Sunrise -->
+      <article class="website-card grid-tequila" tabindex="0" data-website="tequila">
+        <video src="Images/Portfolio/Websites/Website_TequilaSunrise.mp4" autoplay loop muted playsinline class="site-media"></video>
+        <div class="site-overlay">
+          <h3>Tequila Sunrise</h3>
+          <p>Website Design & Dev</p>
+        </div>
+      </article>
+
+      <!-- Final Project -->
+      <article class="website-card grid-final" tabindex="0" data-website="final">
+        <iframe src="https://www.youtube.com/embed/ndlmMfa2f6Y?autoplay=1&mute=1&loop=1&playlist=ndlmMfa2f6Y&controls=0&disablekb=1&fs=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media" tabindex="-1" class="site-media"></iframe>
+        <div class="site-overlay">
+          <h3>Final Project</h3>
+          <p>Web App</p>
+        </div>
+      </article>
+
+      <!-- Royal Oak -->
+      <article class="website-card grid-royal" tabindex="0" data-website="royal">
+        <iframe src="https://www.youtube.com/embed/qE3psGruiyg?autoplay=1&mute=1&loop=1&playlist=qE3psGruiyg&controls=0&disablekb=1&fs=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media" tabindex="-1" class="site-media"></iframe>
+        <div class="site-overlay">
+          <h3>Royal Oak</h3>
+          <p>Company Website</p>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- ─── Website Modal Popup ─────────────────────────────── -->
+  <div id="website-modal" class="game-modal" aria-modal="true" role="dialog">
+    <div class="game-modal-content">
+      <button class="modal-close" id="modal-close" aria-label="Close Modal">&times;</button>
+      <div class="modal-hero">
+        <div class="modal-main-display" id="modal-main-display">
+          <img id="modal-hero-img" src="" alt="Project Banner" />
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-info-left">
+          <h2 id="modal-title" class="modal-title">TITLE</h2>
+          <p id="modal-desc" class="modal-desc">Description</p>
+          <ul id="modal-features" class="modal-features">
+            <!-- bullet points loaded via JS -->
+          </ul>
+        </div>
+        <div class="modal-info-right">
+          <div class="meta-block">
+            <h4>YEAR</h4>
+            <p id="modal-year">2026</p>
+          </div>
+          <div class="meta-block">
+            <h4>TOOLS</h4>
+            <p id="modal-tools">HTML, CSS</p>
+          </div>
+          <div class="meta-block">
+            <h4>ROLES</h4>
+            <p id="modal-roles">Developer</p>
+          </div>
+          <div class="meta-block">
+            <h4>PLATFORM</h4>
+            <p id="modal-platform">Desktop</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-video-section" id="modal-video-section">
+        <h3>PROJECT VIDEO / PREVIEW</h3>
+        <div class="modal-video-wrap" id="modal-video-wrap">
+          <!-- Loaded via JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Footer ─────────────────────────────────────── -->
+  <site-footer></site-footer>
+
+  <script>
+    /* ─── Website Modal Logic ───────────────────────── */
+    const websitesData = {
+      nestly: {
+        title: "Nestly App",
+        desc: "A comprehensive mobile application designed to securely connect remote students with accessible housing. It facilitates streamlined communication by seamlessly bridging tenants seeking roommates with verified landlords offering local accommodations.",
+        features: [
+          "Property discovery and roommate matching",
+          "Integrated real-time chat with landlords and tenants",
+          "Interactive map overlays highlighting proximity to universities",
+          "User profile verification for secure networking"
+        ],
+        year: "2024",
+        tools: "Android, iOS",
+        roles: "Lead Developer, Lead Designer, UI/UX",
+        platform: "Mobile",
+        images: [],
+        videoHTML: '<video src="Images/Portfolio/Websites/Nestly App.mp4" controls autoplay style="width:100%;height:100%;object-fit:cover;background:#000;outline:none;border:none;"></video>'
+      },
+      tequila: {
+        title: "Tequila Sunrise",
+        desc: "An avant-garde hospitality platform conceptualizing a luxurious restaurant and hotel experience set in outer space. The web interface enables users to intuitively book planetary rooms, browse futuristic culinary menus, and reserve their ultimate extraterrestrial getaway.",
+        features: [
+          "Immersive space-themed UI/UX motion design",
+          "Interactive room booking and reservation system",
+          "Dynamic digital restaurant menu",
+          "Fully responsive cosmic layouts"
+        ],
+        year: "2024",
+        tools: "HTML, CSS, JS",
+        roles: "Lead Web Designer, Lead UI/UX, Lead Programmer",
+        platform: "Desktop, Mobile",
+        images: [],
+        videoHTML: '<video src="Images/Portfolio/Websites/Website_TequilaSunrise.mp4" controls autoplay style="width:100%;height:100%;object-fit:cover;background:#000;outline:none;border:none;"></video>'
+      },
+      final: {
+        title: "Pacific Crossing",
+        desc: "Discover the unique culinary experience of this fusion restaurant platform. Bringing together the best of Japanese, Chinese, and Filipino cuisines, the interactive digital menu emphasizes high-quality ingredients with a modern visual hierarchy spanning global specials. Bon appétit!",
+        features: [
+          "Modern fusion restaurant frontend",
+          "Appetizing visual hierarchy for culinary items",
+          "Engaging promotional banners and daily specials"
+        ],
+        year: "2024",
+        tools: "HTML, CSS, JS",
+        roles: "Lead Programmer, Lead Designer, Lead UI/UX",
+        platform: "Desktop, Mobile",
+        images: ["https://img.youtube.com/vi/ndlmMfa2f6Y/maxresdefault.jpg"],
+        videoHTML: '<iframe src="https://www.youtube.com/embed/ndlmMfa2f6Y?autoplay=1" allow="autoplay; fullscreen" allowfullscreen style="width:100%;height:100%;border:none;"></iframe>'
+      },
+      royal: {
+        title: "Royal Oak",
+        desc: "A premium hotel website that caters to a diverse clientele, offering luxurious accommodations alongside affordable room tiers. The elegant design beautifully highlights the perfect coexistence of natural beauty and high-end luxury.",
+        features: [
+          "Elegant, nature-inspired visual design",
+          "Flexible booking options highlighting varied price tiers",
+          "Responsive multimedia galleries"
+        ],
+        year: "2024",
+        tools: "HTML, CSS, JS",
+        roles: "Programmer",
+        platform: "Desktop, Mobile",
+        images: ["https://img.youtube.com/vi/qE3psGruiyg/maxresdefault.jpg"],
+        videoHTML: '<iframe src="https://www.youtube.com/embed/qE3psGruiyg?autoplay=1" allow="autoplay; fullscreen" allowfullscreen style="width:100%;height:100%;border:none;"></iframe>'
+      }
+    };
+
+    const websiteModal = document.getElementById('website-modal');
+    const modalCloseBtn = document.getElementById('modal-close');
+    const modalVideoWrap = document.getElementById('modal-video-wrap');
+    const modalVideoSection = document.getElementById('modal-video-section');
+    const modalMainDisplay = document.getElementById('modal-main-display');
+
+    document.querySelectorAll('.website-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        const siteId = card.getAttribute('data-website');
+        const data = websitesData[siteId];
+        
+        if (data) {
+          if (data.images && data.images.length > 0) {
+            modalMainDisplay.innerHTML = `<img id="modal-hero-img" src="${data.images[0]}" alt="Project Banner" />`;
+            modalVideoSection.style.display = 'block';
+            modalVideoWrap.innerHTML = data.videoHTML;
+          } else {
+            modalMainDisplay.innerHTML = data.videoHTML;
+            modalVideoSection.style.display = 'none';
+          }
+
+          document.getElementById('modal-title').textContent = data.title;
+          document.getElementById('modal-desc').textContent = data.desc;
+          
+          const featuresList = document.getElementById('modal-features');
+          featuresList.innerHTML = '';
+          data.features.forEach(feature => {
+            const li = document.createElement('li');
+            li.textContent = feature;
+            featuresList.appendChild(li);
+          });
+          
+          document.getElementById('modal-year').textContent = data.year;
+          document.getElementById('modal-tools').textContent = data.tools;
+          document.getElementById('modal-roles').textContent = data.roles;
+          document.getElementById('modal-platform').textContent = data.platform;
+          
+          websiteModal.classList.add('show');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+
+    const closeModal = () => {
+      websiteModal.classList.remove('show');
+      document.body.style.overflow = '';
+      modalVideoWrap.innerHTML = '';
+      if (modalMainDisplay.querySelector('video') || modalMainDisplay.querySelector('iframe')) {
+        modalMainDisplay.innerHTML = '<img id="modal-hero-img" src="" alt="Project Banner" />'; 
+      }
+    };
+
+    modalCloseBtn.addEventListener('click', closeModal);
+    websiteModal.addEventListener('click', (e) => {
+      if (e.target === websiteModal) closeModal();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && websiteModal.classList.contains('show')) closeModal();
+    });
+
+    /* ─── Particles Init ────────────────────────────── */
+    const pContainer = document.getElementById('particles-container');
+    const PARTICLE_COUNT = 80;
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.top = Math.random() * 100 + 'vh';
+      const dur = 4 + Math.random() * 6;
+      const delay = Math.random() * 8;
+      const size = Math.random() * 2 + 1;
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.animation = `particleFloat ${dur}s linear ${delay}s infinite`;
+      pContainer.appendChild(p);
+    }
+    
+    /* ─── Navbar Scroll Effect ──────────────────────── */
+    const navbar = document.getElementById('navbar');
+    let scrollHideTimer = null;
+    window.addEventListener('scroll', () => {
+      if(navbar) {
+        navbar.classList.toggle('scrolled', window.scrollY > 10);
+        if (window.scrollY > 50) navbar.classList.add('hidden');
+        else navbar.classList.remove('hidden');
+
+        clearTimeout(scrollHideTimer);
+        scrollHideTimer = setTimeout(() => {
+          navbar.classList.remove('hidden');
+        }, 1500);
+      }
+    }, { passive: true });
+    /* ─── WebGL Liquid Shader (Black, Orange, Purple) ─ */
+    const canvas = document.getElementById('glcanvas');
+    if (canvas) {
+      const gl = canvas.getContext('webgl');
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+      const vsSource = `attribute vec4 aVertexPosition; void main() { gl_Position = aVertexPosition; }`;
+      const fsSource = `
+        precision highp float;
+        uniform vec2 u_resolution;
+        uniform float u_time;
+        vec2 hash(vec2 p) {
+          p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
+          return -1.0 + 2.0 * fract(sin(p) * 43758.5453123);
+        }
+        float noise(vec2 p) {
+          const float K1 = 0.366025404; const float K2 = 0.211324865;
+          vec2 i = floor(p + (p.x + p.y) * K1); vec2 a = p - i + (i.x + i.y) * K2;
+          float m = step(a.y, a.x); vec2 o = vec2(m, 1.0 - m);
+          vec2 b = a - o + K2; vec2 c = a - 1.0 + 2.0 * K2;
+          vec3 h = max(0.5 - vec3(dot(a,a), dot(b,b), dot(c,c)), 0.0);
+          vec3 n = h*h*h*h * vec3(dot(a, hash(i+0.0)), dot(b, hash(i+o)), dot(c, hash(i+1.0)));
+          return dot(n, vec3(70.0));
+        }
+        float fbm(vec2 uv) {
+          float f = 0.0; mat2 m = mat2(1.6, 1.2, -1.2, 1.6);
+          f += 0.5000 * noise(uv); uv = m * uv; f += 0.2500 * noise(uv); uv = m * uv;
+          f += 0.1250 * noise(uv); uv = m * uv; f += 0.0625 * noise(uv); uv = m * uv;
+          return f;
+        }
+        void main() {
+          vec2 st = gl_FragCoord.xy / u_resolution.y;
+          vec2 q = vec2(0.); q.x = fbm(st + 0.02 * u_time); q.y = fbm(st + vec2(1.0));
+          vec2 r = vec2(0.);
+          r.x = fbm(st + 1.0 * q + vec2(1.7, 9.2) + 0.12 * u_time);
+          r.y = fbm(st + 1.0 * q + vec2(8.3, 2.8) + 0.10 * u_time);
+          float f = fbm(st + r);
+          float veins = abs(sin(f * 3.0 + u_time * 0.3));
+          veins = smoothstep(0.93, 1.0, veins); 
+          float faintVeins = smoothstep(0.85, 1.0, abs(sin(f * 6.0 - u_time * 0.1))) * 0.2;
+          float fluid = veins + faintVeins;
+          vec3 baseColor = vec3(0.01, 0.01, 0.01);
+          vec3 orangeColor = vec3(1.0, 0.4, 0.0);
+          vec3 purpleColor = vec3(0.6, 0.1, 0.9);
+          vec3 col = mix(baseColor, orangeColor, fluid);
+          col = mix(col, purpleColor, smoothstep(0.97, 1.0, abs(sin(f * 3.0 + u_time * 0.3))));
+          col *= 0.55; 
+          vec2 center = gl_FragCoord.xy / u_resolution.xy - 0.5;
+          col *= 1.0 - dot(center, center) * 1.5;
+          gl_FragColor = vec4(col, 1.0);
+        }
+      `;
+      function loadShader(gl, type, source) {
+        const shader = gl.createShader(type); gl.shaderSource(shader, source); gl.compileShader(shader);
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) return null;
+        return shader;
+      }
+      const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vsSource);
+      const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
+      const shaderProgram = gl.createProgram();
+      gl.attachShader(shaderProgram, vertexShader); gl.attachShader(shaderProgram, fragmentShader);
+      gl.linkProgram(shaderProgram); gl.useProgram(shaderProgram);
+      const positionBuffer = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+      const positions = [ -1.0, 1.0, 1.0, 1.0, -1.0, -1.0, 1.0, -1.0 ];
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+      const vertexPosition = gl.getAttribLocation(shaderProgram, 'aVertexPosition');
+      gl.vertexAttribPointer(vertexPosition, 2, gl.FLOAT, false, 0, 0); gl.enableVertexAttribArray(vertexPosition);
+      const uResolution = gl.getUniformLocation(shaderProgram, 'u_resolution'); const uTime = gl.getUniformLocation(shaderProgram, 'u_time');
+      let startTime = Date.now();
+      function renderGL() {
+        gl.uniform2f(uResolution, canvas.width, canvas.height); gl.uniform1f(uTime, (Date.now() - startTime) / 1000.0);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); requestAnimationFrame(renderGL);
+      }
+      renderGL();
+    }
+  </script>
+</body>
+</html>

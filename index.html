@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Marc-Ace "Sora" Rycell Edu – Game Developer, Sound Artist & 2D Artist. Explore my portfolio of games, music, and digital art." />
+  <title>Replay Value</title>
+  <link rel="icon" href="Images/Logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet" />
+  <script src="components.js"></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="glcanvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;"></canvas>
+  <div id="particles-container"></div>
+
+  <!-- ─── Navbar ─────────────────────────────────────── -->
+  <site-navbar></site-navbar>
+
+  <!-- ─── Slideshow Hero ─────────────────────────────── -->
+  <site-hero-slideshow title="Replay Value" subtitle="Game Developer &nbsp;|&nbsp; Sound Artist &nbsp;|&nbsp; 2D Artist"></site-hero-slideshow>
+
+  <!-- ─── Featured Games ─────────────────────────────── -->
+  <section id="portfolio" class="section-container">
+    <div class="section-header">
+      <h2 class="section-title">Featured Games</h2>
+      <p class="section-desc">A selection of my favorite game projects, showcasing my skills in development, 2D/3D art, and sound design.</p>
+    </div>
+
+    <div class="game-showcase">
+      <!-- MASK-A-RAID -->
+      <article class="game-card">
+        <div class="game-gallery" data-gallery="mask-a-raid">
+          <div class="main-display">
+            <img src="Images/Featured Game/Mask-A-Raid/MainMenuBG.png" alt="Mask-A-Raid Main Image" loading="lazy" />
+          </div>
+          <div class="thumb-strip">
+            <button class="thumb-btn active" data-src="Images/Featured Game/Mask-A-Raid/MainMenuBG.png" aria-label="View Main Menu">
+              <img src="Images/Featured Game/Mask-A-Raid/MainMenuBG.png" alt="Thumbnail" />
+            </button>
+            <button class="thumb-btn" data-src="Images/Featured Game/Mask-A-Raid/Screenshot1.png" aria-label="View Screenshot 1">
+              <img src="Images/Featured Game/Mask-A-Raid/Screenshot1.png" alt="Thumbnail" />
+            </button>
+            <button class="thumb-btn" data-src="Images/Featured Game/Mask-A-Raid/Screenshot2.png" aria-label="View Screenshot 2">
+              <img src="Images/Featured Game/Mask-A-Raid/Screenshot2.png" alt="Thumbnail" />
+            </button>
+            <button class="thumb-btn" data-src="Images/Featured Game/Mask-A-Raid/Screenshot3.png" aria-label="View Screenshot 3">
+              <img src="Images/Featured Game/Mask-A-Raid/Screenshot3.png" alt="Thumbnail" />
+            </button>
+          </div>
+        </div>
+        <div class="game-info">
+          <h3 data-text="Mask-A-Raid">Mask-A-Raid</h3>
+          <p>A game about surviving a bureaucratic apocalypse where the player uses social stealth and official (or undead) masks to bypass checkpoints and zombie hordes to reach evacuation.</p>
+          <div class="game-tags">
+            <span class="tag">Game Designer</span>
+            <span class="tag">Lead Developer</span>
+            <span class="tag">Concept</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- CustomerID -->
+      <article class="game-card">
+        <div class="game-gallery" data-gallery="customer-id">
+          <div class="main-display">
+            <img src="Images/Featured Game/CustomerID/Customer ID Thumbnail.png" alt="Customer ID Main Image" loading="lazy" />
+          </div>
+          <div class="thumb-strip">
+            <button class="thumb-btn active" data-src="Images/Featured Game/CustomerID/Customer ID Thumbnail.png" aria-label="View Thumbnail">
+              <img src="Images/Featured Game/CustomerID/Customer ID Thumbnail.png" alt="Thumbnail" />
+            </button>
+            <button class="thumb-btn" data-src="Images/Featured Game/CustomerID/Screenshots_CustomerID (1).png" aria-label="View Screenshot 1">
+              <img src="Images/Featured Game/CustomerID/Screenshots_CustomerID (1).png" alt="Thumbnail" />
+            </button>
+            <button class="thumb-btn" data-src="Images/Featured Game/CustomerID/Screenshots_CustomerID (2).png" aria-label="View Screenshot 2">
+              <img src="Images/Featured Game/CustomerID/Screenshots_CustomerID (2).png" alt="Thumbnail" />
+            </button>
+            <button class="thumb-btn" data-src="Images/Featured Game/CustomerID/Screenshots_CustomerID (3).png" aria-label="View Screenshot 3">
+              <img src="Images/Featured Game/CustomerID/Screenshots_CustomerID (3).png" alt="Thumbnail" />
+            </button>
+            <button class="thumb-btn" data-src="Images/Featured Game/CustomerID/Screenshots_CustomerID (4).png" aria-label="View Screenshot 4">
+              <img src="Images/Featured Game/CustomerID/Screenshots_CustomerID (4).png" alt="Thumbnail" />
+            </button>
+            <button class="thumb-btn" data-src="Images/Featured Game/CustomerID/Screenshots_CustomerID (5).png" aria-label="View Screenshot 5">
+              <img src="Images/Featured Game/CustomerID/Screenshots_CustomerID (5).png" alt="Thumbnail" />
+            </button>
+          </div>
+        </div>
+        <div class="game-info">
+          <h3 data-text="Customer ID">Customer ID</h3>
+          <p>Customer ID is a 2.5D hybrid cashier simulator with pixel and 3D visuals. Set in a semi-chaotic Filipino supermarket, you play as a cashier managing queues, scanning items, checking IDs, and making difficult calls when things go sideways. The game fuses financial realism and satire in quick-paced mechanics that test both your ethics and speed.</p>
+          <div class="game-tags">
+            <span class="tag">Lead Developer</span>
+            <span class="tag">Lead Designer</span>
+            <span class="tag">Artist</span>
+            <span class="tag">Sound Director</span>
+            <span class="tag">Sound Artist</span>
+            <span class="tag">UI/UX</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Foam & Fortune -->
+      <article class="game-card">
+        <div class="game-gallery" data-gallery="foam-fortune">
+          <div class="main-display">
+            <img src="Images/Featured Game/Foam & Fortune/TITLECARD (1).png" alt="Foam & Fortune Main Image" loading="lazy" />
+          </div>
+          <div class="thumb-strip">
+            <button class="thumb-btn active" data-src="Images/Featured Game/Foam & Fortune/TITLECARD (1).png" aria-label="View Title">
+              <img src="Images/Featured Game/Foam & Fortune/TITLECARD (1).png" alt="Thumbnail" />
+            </button>
+            <button class="thumb-btn" data-src="Images/Featured Game/Foam & Fortune/Screenshot_Foam& Fortune (1).png" aria-label="View Screenshot 1">
+              <img src="Images/Featured Game/Foam & Fortune/Screenshot_Foam& Fortune (1).png" alt="Thumbnail" />
+            </button>
+            <button class="thumb-btn" data-src="Images/Featured Game/Foam & Fortune/Screenshot_Foam& Fortune (2).png" aria-label="View Screenshot 2">
+              <img src="Images/Featured Game/Foam & Fortune/Screenshot_Foam& Fortune (2).png" alt="Thumbnail" />
+            </button>
+            <button class="thumb-btn" data-src="Images/Featured Game/Foam & Fortune/Screenshot_Foam& Fortune (3).png" aria-label="View Screenshot 3">
+              <img src="Images/Featured Game/Foam & Fortune/Screenshot_Foam& Fortune (3).png" alt="Thumbnail" />
+            </button>
+            <button class="thumb-btn" data-src="Images/Featured Game/Foam & Fortune/Screenshot_Foam& Fortune (4).png" aria-label="View Screenshot 4">
+              <img src="Images/Featured Game/Foam & Fortune/Screenshot_Foam& Fortune (4).png" alt="Thumbnail" />
+            </button>
+            <button class="thumb-btn" data-src="Images/Featured Game/Foam & Fortune/Screenshot_Foam& Fortune (5).png" aria-label="View Screenshot 5">
+              <img src="Images/Featured Game/Foam & Fortune/Screenshot_Foam& Fortune (5).png" alt="Thumbnail" />
+            </button>
+          </div>
+        </div>
+        <div class="game-info">
+          <h3 data-text="Foam & Fortune">Foam &amp; Fortune</h3>
+          <p>Foam & Fortune is a roguelike, isometric bubble-themed action game where players take control of Bubbleman, a sentient bubble born from dish soap and divine spark. Tasked with cleansing the corrupted underworld of a sink, players will fight through waves of dirt, pests, and decay.</p>
+          <div class="game-tags">
+            <span class="tag">Lead Game Designer</span>
+            <span class="tag">Lead Developer</span>
+            <span class="tag">2D Artist</span>
+            <span class="tag">UI/UX</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ─── Featured Artworks ────────────────────────────── -->
+  <section id="artworks" class="section-container" style="padding-top: 60px;">
+    <div class="section-header">
+      <h2 class="section-title">Featured Artworks</h2>
+      <p class="section-desc">A selection of my favorite 3D artworks, digital illustrations, and graphic designs, showcasing my skills in Blender, Photoshop, and other tools. These projects demonstrate my ability to create visually compelling assets.</p>
+    </div>
+
+    <div class="art-grid">
+      <!-- Art 1 -->
+      <article class="art-card">
+        <div class="art-img-wrap">
+          <img src="Images/Featured Artworks/Gundam (1).jpg" alt="Gundam Model 1" loading="lazy" />
+        </div>
+        <h3 class="art-title" data-text="Gundam Build 1">Gundam Build 1</h3>
+        <div class="art-tags">
+          <span class="art-tag">Photography</span>
+        </div>
+      </article>
+
+      <!-- Art 2 -->
+      <article class="art-card">
+        <div class="art-img-wrap">
+          <img src="Images/Featured Artworks/Gundam (2).jpg" alt="Gundam Model 2" loading="lazy" />
+        </div>
+        <h3 class="art-title" data-text="Gundam Build 2">Gundam Build 2</h3>
+        <div class="art-tags">
+          <span class="art-tag">Photography</span>
+        </div>
+      </article>
+
+      <!-- Art 3 -->
+      <article class="art-card">
+        <div class="art-img-wrap">
+          <img src="Images/Featured Artworks/Explosion.png" alt="Explosion VFX" loading="lazy" />
+        </div>
+        <h3 class="art-title" data-text="Explosion VFX">Explosion VFX</h3>
+        <div class="art-tags">
+          <span class="art-tag">3D</span>
+          <span class="art-tag">VFX</span>
+          <span class="art-tag">Unity 6</span>
+        </div>
+      </article>
+
+      <!-- Art 4 -->
+      <article class="art-card">
+        <div class="art-img-wrap">
+          <img src="Images/Featured Artworks/Map of Redsoul Wall .png" alt="Map of Redsoul Wall" loading="lazy" />
+        </div>
+        <h3 class="art-title" data-text="Map of Redsoul Wall">Map of Redsoul Wall</h3>
+        <div class="art-tags">
+          <span class="art-tag">2D Digital Art</span>
+        </div>
+      </article>
+
+      <!-- Art 5 -->
+      <article class="art-card">
+        <div class="art-img-wrap">
+          <img src="Images/Featured Artworks/Inktober 2025.jpg" alt="Inktober 2025" loading="lazy" />
+        </div>
+        <h3 class="art-title" data-text="Inktober 2025">Inktober 2025</h3>
+        <div class="art-tags">
+          <span class="art-tag">Illustration</span>
+          <span class="art-tag">Traditional/Digital</span>
+        </div>
+      </article>
+
+      <!-- Art 6 -->
+      <article class="art-card">
+        <div class="art-img-wrap">
+          <img src="Images/Featured Artworks/Under My Blanket Digital art.jpg" alt="Under My Blanket" loading="lazy" />
+        </div>
+        <h3 class="art-title" data-text="Under My Blanket">Under My Blanket</h3>
+        <div class="art-tags">
+          <span class="art-tag">Digital Art</span>
+          <span class="art-tag">Illustration</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ─── Featured Websites ────────────────────────────── -->
+  <section id="websites" class="section-container" style="padding-top: 60px;">
+    <div class="section-header">
+      <h2 class="section-title">Featured Websites</h2>
+      <p class="section-desc">Showcasing fully responsive and interactive web experiences, developed with a focus on seamless UI/UX design and modern web technologies.</p>
+    </div>
+
+    <div class="game-showcase">
+      <!-- Nestly App -->
+      <article class="game-card">
+        <div class="web-video-wrap phone">
+          <video src="Images/Featured Websites/Nestly App.mp4" autoplay loop muted playsinline></video>
+        </div>
+        <div class="game-info">
+          <h3 data-text="Nestly App">Nestly App</h3>
+          <p>An app designed to help students that are far from their schools and universities to find nearby units or dorms as well chat with its current tenants that are finding roomates, and also to chat to landlords that are finding tenants.</p>
+          <div class="game-tags">
+            <span class="tag">Web Design</span>
+            <span class="tag">UI/UX</span>
+            <span class="tag">Frontend</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Royal Oak Website -->
+      <article class="game-card">
+        <div class="web-video-wrap" style="position:relative;overflow:hidden;">
+          <iframe src="https://www.youtube.com/embed/qE3psGruiyg?start=31&autoplay=1&mute=1&loop=1&playlist=qE3psGruiyg&controls=0&showinfo=0&rel=0&disablekb=1&iv_load_policy=3&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media" style="width:100%;height:100%;border:0;pointer-events:none;display:block;"></iframe>
+          <div style="position:absolute;inset:0;z-index:2;"></div>
+        </div>
+        <div class="game-info">
+          <h3 data-text="Royal Oak Website">Royal Oak Website</h3>
+          <p>A hotel website that caters luxury rooms from affordable and luxury price tags.</p>
+          <div class="game-tags">
+            <span class="tag">Web Development</span>
+            <span class="tag">Animations</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ─── Footer ─────────────────────────────────────── -->
+  <site-footer></site-footer>
+
+  <!-- ─── Lightbox Overlay ───────────────────────────── -->
+  <div id="lightbox" class="lightbox">
+    <button id="lightbox-close" class="lightbox-close" aria-label="Close Lightbox">&times;</button>
+    <img id="lightbox-img" src="" alt="Expanded Artwork" />
+  </div>
+
+  <script>
+
+
+    /* ── Lightbox JS ──────────────────────────────────── */
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    // Open Lightbox
+    document.querySelectorAll('.art-img-wrap img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add('show');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+      });
+    });
+
+    // Close Lightbox function
+    const closeLightbox = () => {
+      lightbox.classList.remove('show');
+      document.body.style.overflow = '';
+      setTimeout(() => { lightboxImg.src = ''; }, 300); // Clear source after fade
+    };
+
+    // Close on button click
+    lightboxClose.addEventListener('click', closeLightbox);
+
+    // Close on backdrop click (not the image itself)
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    // Keyboard navigation (Escape to close)
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft')  prev();
+      if (e.key === 'ArrowRight') next();
+      if (e.key === 'Escape' && lightbox.classList.contains('show')) closeLightbox();
+    });
+
+
+
+    /* ── Gallery JS ───────────────────────────────────── */
+    document.querySelectorAll('.game-gallery').forEach(gallery => {
+      const mainImg = gallery.querySelector('.main-display img');
+      const thumbs = gallery.querySelectorAll('.thumb-btn');
+
+      thumbs.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Remove active from all
+          thumbs.forEach(t => t.classList.remove('active'));
+          // Add active to clicked
+          btn.classList.add('active');
+
+          const newSrc = btn.getAttribute('data-src');
+          // Fade effect
+          mainImg.classList.add('fade');
+          setTimeout(() => {
+            mainImg.src = newSrc;
+            mainImg.classList.remove('fade');
+          }, 150);
+        });
+      });
+    });
+
+    /* ── Navbar scroll & hide effect ──────────────────── */
+    const navbar = document.getElementById('navbar');
+    let scrollHideTimer = null;
+
+    window.addEventListener('scroll', () => {
+      if (navbar) {
+        // Background blur state
+        navbar.classList.toggle('scrolled', window.scrollY > 10);
+
+        // ALWAYS hide navbar immediately when a scroll event happens (unless at very top)
+        if (window.scrollY > 50) {
+          navbar.classList.add('hidden');
+        } else {
+          navbar.classList.remove('hidden');
+        }
+
+        // Clear the previous timer since user is still scrolling
+        clearTimeout(scrollHideTimer);
+
+        // Set a new timer to bring the navbar back after 1.5s of no scrolling
+        scrollHideTimer = setTimeout(() => {
+          navbar.classList.remove('hidden');
+        }, 1500);
+      }
+    }, { passive: true });
+
+    /* ─── Slideshow Data ──────────────────────────────── */
+    const slides = [
+      { src: 'Images/Index_Slideshow/MainMenuBG.png',           caption: 'Game Dev' },
+      { src: 'Images/Index_Slideshow/main menu bg.png',         caption: 'UI Design' },
+      { src: 'Images/Index_Slideshow/TITLECARD (1).png',        caption: 'Title Card Art' },
+      { src: 'Images/Index_Slideshow/Screenshot 2026-03-20 232829.png', caption: 'Project Showcase' },
+      { src: 'Images/Index_Slideshow/UnderMyBlanketDigi.jpg',   caption: 'Digital Art' },
+      { src: 'Images/Index_Slideshow/Customer ID Thumbnail.png',caption: 'Multimedia' },
+    ];
+
+    const INTERVAL = 3000;
+    const container   = document.getElementById('slides-container');
+    const dotWrap     = document.getElementById('dot-container');
+    const progressBar = document.getElementById('progress-bar');
+    const captionEl   = document.getElementById('slide-caption-text');
+
+    let current = 0;
+
+    if (container) {
+      const slideEls = slides.map((s, i) => {
+        const el = document.createElement('div');
+        el.className = 'slide' + (i === 0 ? ' active' : '');
+        el.style.backgroundImage = `url('${s.src}')`;
+        el.setAttribute('role', 'img');
+        el.setAttribute('aria-label', s.caption);
+        container.appendChild(el);
+        return el;
+      });
+
+      const dots = slides.map((_, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'dot' + (i === 0 ? ' active' : '');
+        btn.setAttribute('role', 'tab');
+        btn.setAttribute('aria-label', `Slide ${i + 1}`);
+        btn.addEventListener('click', () => goTo(i));
+        if (dotWrap) dotWrap.appendChild(btn);
+        return btn;
+      });
+
+      function startProgress() {
+        if (!progressBar) return;
+        progressBar.style.transition = 'none';
+        progressBar.style.width = '0%';
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          progressBar.style.transition = `width ${INTERVAL}ms linear`;
+          progressBar.style.width = '100%';
+        }));
+      }
+
+      function goTo(index) {
+        const next = (index + slides.length) % slides.length;
+        if (next === current) return;
+
+        // Deactivate old slide
+        slideEls[current].classList.remove('active');
+        slideEls[current].classList.add('exit');
+        dots[current].classList.remove('active');
+        const old = slideEls[current];
+        setTimeout(() => old.classList.remove('exit'), 1000);
+
+        current = next;
+        slideEls[current].classList.add('active');
+        dots[current].classList.add('active');
+        if (captionEl) captionEl.textContent = slides[current].caption;
+        startProgress();
+      }
+
+      if (captionEl) captionEl.textContent = slides[0].caption;
+
+      // Un-stoppable auto-advance
+      setInterval(() => goTo(current + 1), INTERVAL);
+      startProgress();
+    }
+
+    /* ── Init Particles ───────────────────────────────── */
+    const pContainer = document.getElementById('particles-container');
+    const PARTICLE_COUNT = 80;
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      
+      // Randomize starting position
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.top = Math.random() * 100 + 'vh';
+      
+      // Randomize animation duration and delay
+      const dur = 4 + Math.random() * 6; // 4s to 10s
+      const delay = Math.random() * 8; // 0s to 8s
+      
+      // Some vary slightly in size
+      const size = Math.random() * 2 + 1; // 1px to 3px
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      
+      // Slight vertical drift distance logic (done using top modification in keyframes would be hard, so just translate heavily)
+      // Actually we will use a custom keyframe generated programmatically or just rely on CSS
+      p.style.animation = `particleFloat ${dur}s linear ${delay}s infinite`;
+
+      pContainer.appendChild(p);
+    }
+
+    /* ── ScrollSpy (Active Navbar Links) ─────────────── */
+    const sections = document.querySelectorAll('section');
+    window.addEventListener('scroll', () => {
+      let currentId = '';
+      
+      // If at the very top, highlight Home
+      if (window.scrollY < 200) {
+        currentId = 'hero';
+      } else {
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          if (scrollY >= (sectionTop - 300)) {
+            currentId = section.getAttribute('id');
+          }
+        });
+      }
+
+      // Check if we reached the bottom to highlight contact reliably
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+        currentId = 'contact';
+      }
+
+      // Wait for components.js to parse and inject nav before selecting
+      const navLinks = document.querySelectorAll('.nav-links > li > a, .nav-links > li.dropdown > a');
+      navLinks.forEach(a => {
+        a.classList.remove('active');
+        const href = a.getAttribute('href');
+        
+        if (currentId === 'hero' && href === 'index.html') {
+          a.classList.add('active');
+        } else if (href && href.includes('#' + currentId)) {
+          a.classList.add('active');
+        } else if (href && href.includes('#portfolio') && (currentId === 'artworks' || currentId === 'websites')) {
+          // Keep Portfolio highlighted when scrolling through its subsections
+          a.classList.add('active');
+        }
+      });
+    }, { passive: true });
+    /* ─── WebGL Liquid Shader (Black, Orange, Purple) ─ */
+    const canvas = document.getElementById('glcanvas');
+    if (canvas) {
+      const gl = canvas.getContext('webgl');
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+      const vsSource = `attribute vec4 aVertexPosition; void main() { gl_Position = aVertexPosition; }`;
+      const fsSource = `
+        precision highp float;
+        uniform vec2 u_resolution;
+        uniform float u_time;
+        vec2 hash(vec2 p) {
+          p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
+          return -1.0 + 2.0 * fract(sin(p) * 43758.5453123);
+        }
+        float noise(vec2 p) {
+          const float K1 = 0.366025404; const float K2 = 0.211324865;
+          vec2 i = floor(p + (p.x + p.y) * K1); vec2 a = p - i + (i.x + i.y) * K2;
+          float m = step(a.y, a.x); vec2 o = vec2(m, 1.0 - m);
+          vec2 b = a - o + K2; vec2 c = a - 1.0 + 2.0 * K2;
+          vec3 h = max(0.5 - vec3(dot(a,a), dot(b,b), dot(c,c)), 0.0);
+          vec3 n = h*h*h*h * vec3(dot(a, hash(i+0.0)), dot(b, hash(i+o)), dot(c, hash(i+1.0)));
+          return dot(n, vec3(70.0));
+        }
+        float fbm(vec2 uv) {
+          float f = 0.0; mat2 m = mat2(1.6, 1.2, -1.2, 1.6);
+          f += 0.5000 * noise(uv); uv = m * uv; f += 0.2500 * noise(uv); uv = m * uv;
+          f += 0.1250 * noise(uv); uv = m * uv; f += 0.0625 * noise(uv); uv = m * uv;
+          return f;
+        }
+        void main() {
+          vec2 st = gl_FragCoord.xy / u_resolution.y;
+          vec2 q = vec2(0.); q.x = fbm(st + 0.02 * u_time); q.y = fbm(st + vec2(1.0));
+          vec2 r = vec2(0.);
+          r.x = fbm(st + 1.0 * q + vec2(1.7, 9.2) + 0.12 * u_time);
+          r.y = fbm(st + 1.0 * q + vec2(8.3, 2.8) + 0.10 * u_time);
+          float f = fbm(st + r);
+          float veins = abs(sin(f * 3.0 + u_time * 0.3));
+          veins = smoothstep(0.93, 1.0, veins); 
+          float faintVeins = smoothstep(0.85, 1.0, abs(sin(f * 6.0 - u_time * 0.1))) * 0.2;
+          float fluid = veins + faintVeins;
+          vec3 baseColor = vec3(0.01, 0.01, 0.01);
+          vec3 orangeColor = vec3(1.0, 0.4, 0.0);
+          vec3 purpleColor = vec3(0.6, 0.1, 0.9);
+          vec3 col = mix(baseColor, orangeColor, fluid);
+          col = mix(col, purpleColor, smoothstep(0.97, 1.0, abs(sin(f * 3.0 + u_time * 0.3))));
+          col *= 0.55; 
+          vec2 center = gl_FragCoord.xy / u_resolution.xy - 0.5;
+          col *= 1.0 - dot(center, center) * 1.5;
+          gl_FragColor = vec4(col, 1.0);
+        }
+      `;
+      function loadShader(gl, type, source) {
+        const shader = gl.createShader(type); gl.shaderSource(shader, source); gl.compileShader(shader);
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) return null;
+        return shader;
+      }
+      const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vsSource);
+      const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
+      const shaderProgram = gl.createProgram();
+      gl.attachShader(shaderProgram, vertexShader); gl.attachShader(shaderProgram, fragmentShader);
+      gl.linkProgram(shaderProgram); gl.useProgram(shaderProgram);
+      const positionBuffer = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+      const positions = [ -1.0, 1.0, 1.0, 1.0, -1.0, -1.0, 1.0, -1.0 ];
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+      const vertexPosition = gl.getAttribLocation(shaderProgram, 'aVertexPosition');
+      gl.vertexAttribPointer(vertexPosition, 2, gl.FLOAT, false, 0, 0); gl.enableVertexAttribArray(vertexPosition);
+      const uResolution = gl.getUniformLocation(shaderProgram, 'u_resolution'); const uTime = gl.getUniformLocation(shaderProgram, 'u_time');
+      let startTime = Date.now();
+      function renderGL() {
+        gl.uniform2f(uResolution, canvas.width, canvas.height); gl.uniform1f(uTime, (Date.now() - startTime) / 1000.0);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); requestAnimationFrame(renderGL);
+      }
+      renderGL();
+    }
+  </script>
+
+</body>
+</html>
+

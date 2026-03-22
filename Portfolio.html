@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Replay Value | Portfolio Hub</title>
+  <link rel="icon" href="Images/Logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet" />
+  <script src="components.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="glcanvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;"></canvas>
+  <div id="particles-container"></div>
+
+  <!-- ─── Navbar ─────────────────────────────────────── -->
+  <site-navbar></site-navbar>
+
+  <!-- ─── Slideshow Hero ─────────────────────────────── -->
+  <site-hero-slideshow title="PORTFOLIO HUB" subtitle="A comprehensive collection of my games, art, music, and digital developments."></site-hero-slideshow>
+
+  <!-- ─── Portfolio Categories Grid ───────────────────── -->
+  <main class="section-container" style="padding-top: 20px; padding-bottom: 80px;">
+    <div class="art-category-wrapper">
+      
+      <!-- 1. GAMES CATEGORY -->
+      <div class="art-category">
+        <button class="cat-banner-btn" aria-expanded="false" data-target="cat-games">
+          <div class="cat-banner-bg" style="background-image: url('Images/Portfolio/Games/ScreenShots/CustomerID/Customer%20ID%20Thumbnail.png');"></div>
+          <div class="cat-banner-overlay"></div>
+          <h2 class="cat-banner-title">GAMES</h2>
+        </button>
+        <div class="cat-content" id="cat-games">
+          <div class="cat-inner-grid games-hub-grid" id="grid-games">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. PHOTOGRAPHY CATEGORY (Nested) -->
+      <div class="art-category">
+        <button class="cat-banner-btn" aria-expanded="false" data-target="cat-photography">
+          <div class="cat-banner-bg" style="background-image: url('Images/Portfolio/Artworks/Photography/Wing Gundam/IMG_0908.jpg');"></div>
+          <div class="cat-banner-overlay"></div>
+          <h2 class="cat-banner-title">PHOTOGRAPHY</h2>
+        </button>
+        <div class="cat-content" id="cat-photography">
+          <div class="cat-inner-list" id="grid-photography">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. ART CATEGORY -->
+      <div class="art-category">
+        <button class="cat-banner-btn" aria-expanded="false" data-target="cat-art">
+          <div class="cat-banner-bg" style="background-image: url('Images/Portfolio/Artworks/Art/Inktober 2025.jpg');"></div>
+          <div class="cat-banner-overlay"></div>
+          <h2 class="cat-banner-title">DIGITAL & TRADITIONAL ART</h2>
+        </button>
+        <div class="cat-content" id="cat-art">
+          <div class="cat-inner-grid" id="grid-art">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. AUDIO CATEGORY -->
+      <div class="art-category">
+        <button class="cat-banner-btn" aria-expanded="false" data-target="cat-audio">
+          <div class="cat-banner-bg" style="background-image: url('Images/Portfolio/Artworks/Audio/thumb_80s_BGM_2.png'); background-position: center; background-size: cover;"></div>
+          <div class="cat-banner-overlay"></div>
+          <h2 class="cat-banner-title">AUDIO & MUSIC</h2>
+        </button>
+        <div class="cat-content" id="cat-audio">
+          <div class="cat-inner-audio" id="grid-audio">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. WEBSITES CATEGORY -->
+      <div class="art-category">
+        <button class="cat-banner-btn" aria-expanded="false" data-target="cat-websites">
+          <div class="cat-banner-bg" style="background-image: url('https://img.youtube.com/vi/ndlmMfa2f6Y/maxresdefault.jpg'); background-size: cover;"></div>
+          <div class="cat-banner-overlay"></div>
+          <h2 class="cat-banner-title">WEBSITES</h2>
+        </button>
+        <div class="cat-content" id="cat-websites">
+          <div class="cat-inner-grid websites-grid" id="grid-websites" style="padding: 30px;">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. VFX CATEGORY -->
+      <div class="art-category">
+        <button class="cat-banner-btn" aria-expanded="false" data-target="cat-vfx">
+          <div class="cat-banner-bg">
+            <video src="Images/Portfolio/Artworks/VFX/EDU_Lightning.mp4" autoplay loop muted playsinline></video>
+          </div>
+          <div class="cat-banner-overlay"></div>
+          <h2 class="cat-banner-title">VFX (Unity 6)</h2>
+        </button>
+        <div class="cat-content" id="cat-vfx">
+          <div class="cat-inner-grid hub-grid" id="grid-vfx">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ─── Footer ─────────────────────────────────────── -->
+  <site-footer></site-footer>
+
+  <!-- ─── Game Modal Popup ─────────────────────────────── -->
+  <div id="game-modal" class="game-modal" aria-modal="true" role="dialog">
+    <div class="game-modal-content">
+      <button class="modal-close" id="modal-game-close" aria-label="Close Modal">&times;</button>
+      <div class="modal-hero">
+        <div class="modal-main-display" id="modal-game-display">
+          <div class="modal-video-wrap" id="modal-game-video-wrap" style="width:100%; height:100%;"></div>
+          <img id="modal-game-hero-img" class="modal-hero-img" src="" alt="Game Banner" style="width:100%; height:100%; object-fit: contain; display:none;" />
+        </div>
+      </div>
+      <div class="modal-thumb-strip" id="modal-game-thumb-strip"></div>
+      <div class="modal-body">
+        <div class="modal-info-left">
+          <h2 id="modal-game-title" class="modal-title">GAME TITLE</h2>
+          <p id="modal-game-desc" class="modal-desc">Description</p>
+          <ul id="modal-game-features" class="modal-features"></ul>
+        </div>
+        <div class="modal-info-right">
+          <div class="meta-block"><h4>YEAR</h4><p id="modal-game-year">2026</p></div>
+          <div class="meta-block"><h4>TOOLS</h4><p id="modal-game-tools">Unity, C#</p></div>
+          <div class="meta-block"><h4>ROLES</h4><p id="modal-game-roles">Lead Developer</p></div>
+          <div class="meta-block"><h4>PLATFORM</h4><p id="modal-game-platform">PC</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Website Modal Popup ─────────────────────────────── -->
+  <div id="website-modal" class="game-modal" aria-modal="true" role="dialog">
+    <div class="game-modal-content">
+      <button class="modal-close" id="modal-site-close" aria-label="Close Modal">&times;</button>
+      <div class="modal-hero">
+        <div class="modal-main-display" id="modal-site-main-display">
+          <div class="modal-video-wrap" id="modal-site-video-wrap" style="width:100%; height:100%;"></div>
+          <img id="modal-site-hero-img" src="" alt="Project Banner" style="width:100%; height:100%; object-fit: contain;" />
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-info-left">
+          <h2 id="modal-site-title" class="modal-title">TITLE</h2>
+          <p id="modal-site-desc" class="modal-desc">Description</p>
+          <ul id="modal-site-features" class="modal-features"></ul>
+        </div>
+        <div class="modal-info-right">
+          <div class="meta-block"><h4>YEAR</h4><p id="modal-site-year">2024</p></div>
+          <div class="meta-block"><h4>TOOLS</h4><p id="modal-site-tools">HTML, CSS</p></div>
+          <div class="meta-block"><h4>ROLES</h4><p id="modal-site-roles">Developer</p></div>
+          <div class="meta-block"><h4>PLATFORM</h4><p id="modal-site-platform">Web</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Lightbox Overlay (for Art/Photo) ────────────── -->
+  <div id="lightbox" class="lightbox">
+    <button id="lightbox-close" class="lightbox-close" aria-label="Close Lightbox">&times;</button>
+    <img id="lightbox-img" src="" alt="Expanded Artwork" />
+  </div>
+
+  <script>
+    /* ─── Consolidated Data ──────────────────────────── */
+    const gameData = {
+      "mask-a-raid": {
+        title: "Mask-A-Raid",
+        desc: "A stylized stealth-action game set in a moody, neon-lit rainy environment. Master the shadows, outsmart guards with unique gadgets, and uncover a cyberpunk conspiracy in this atmospheric 'Infiltration' experience.",
+        features: ["Dynamic lighting and shadow-based stealth mechanics", "Functional gadget system (Decoys, Sound Emitters)", "Intelligent AI patrol paths and vision cones", "Moody atmospheric soundscapes"],
+        year: "2025", tools: "Unity, C#", roles: "Game Designer, Lead Developer, Concept", platform: "PC, Windows",
+        images: ["https://img.youtube.com/vi/seUKY9vGvEQ/maxresdefault.jpg"],
+        cardVideo: '<iframe src="https://www.youtube.com/embed/seUKY9vGvEQ?autoplay=1&mute=1&loop=1&playlist=seUKY9vGvEQ&controls=0&disablekb=1&fs=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media" tabindex="-1"></iframe>',
+        videoHTML: '<iframe src="https://www.youtube.com/embed/seUKY9vGvEQ?autoplay=1" allow="autoplay; fullscreen" allowfullscreen style="width:100%;height:100%;border:none;"></iframe>'
+      },
+      "foam-fortune": {
+        title: "Foam & Fortune",
+        desc: "A vibrant, retro-inspired arcade shooter featuring high-energy projectile combat. Blast through waves of enemies, manage your resources, and aim for the high score in this tribute to classic shoot-'em-ups.",
+        features: ["Classic arcade-style projectile physics", "Hand-drawn sprite animations and VFX", "High-energy original chiptune soundtrack", "Dynamic difficulty scaling"],
+        year: "2024", tools: "Unity, C#", roles: "Lead Game Designer, Lead Developer, 2D Artist, UI/UX", platform: "PC, Windows",
+        images: ["https://img.youtube.com/vi/aZLeCOs9Yxc/maxresdefault.jpg"],
+        cardVideo: '<iframe src="https://www.youtube.com/embed/aZLeCOs9Yxc?autoplay=1&mute=1&loop=1&playlist=aZLeCOs9Yxc&controls=0&disablekb=1&fs=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media" tabindex="-1"></iframe>',
+        videoHTML: '<iframe src="https://www.youtube.com/embed/aZLeCOs9Yxc?autoplay=1" allow="autoplay; fullscreen" allowfullscreen style="width:100%;height:100%;border:none;"></iframe>'
+      },
+      "character-selection": {
+        title: "Character Selection",
+        desc: "A technical showcase of modern UI/UX design and 3D character integration. Features smooth transitions, interactive skill previews, and a responsive layout designed for professional-grade game menus.",
+        features: ["Smooth CSS and C# UI transition systems", "Interactive 3D model viewing in-engine", "Real-time stat visualization and skill previews", "Highly responsive layout designs"],
+        year: "2024", tools: "Unity, C#", roles: "UI/UX Designer, Programmer", platform: "Cross-platform",
+        images: ["https://img.youtube.com/vi/0uthj6vv0Wc/maxresdefault.jpg"],
+        cardVideo: '<iframe src="https://www.youtube.com/embed/0uthj6vv0Wc?autoplay=1&mute=1&loop=1&playlist=0uthj6vv0Wc&controls=0&disablekb=1&fs=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media" tabindex="-1"></iframe>',
+        videoHTML: '<iframe src="https://www.youtube.com/embed/0uthj6vv0Wc?autoplay=1" allow="autoplay; fullscreen" allowfullscreen style="width:100%;height:100%;border:none;"></iframe>'
+      },
+      "tower-defense": {
+        title: "Aetherforge (Tower Defense)",
+        desc: "A strategic tower defense game challenging players to balance resource management with tactical unit placement. Build complex defenses, upgrade your towers, and protect the core from relentless waves of arcane foes.",
+        features: ["Intricate pathfinding and AI wave systems", "Strategic branching upgrade trees for towers", "Resource management and survival mechanics", "Vibrant particle-based magical effects"],
+        year: "2024", tools: "Unity, C#", roles: "Lead Developer, Level Designer", platform: "PC, Web",
+        images: ["https://img.youtube.com/vi/yrps7W5h5BU/maxresdefault.jpg"],
+        cardVideo: '<iframe src="https://www.youtube.com/embed/yrps7W5h5BU?autoplay=1&mute=1&loop=1&playlist=yrps7W5h5BU&controls=0&disablekb=1&fs=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media" tabindex="-1"></iframe>',
+        videoHTML: '<iframe src="https://www.youtube.com/embed/yrps7W5h5BU?autoplay=1" allow="autoplay; fullscreen" allowfullscreen style="width:100%;height:100%;border:none;"></iframe>'
+      },
+      "customer-id": {
+        title: "Customer ID",
+        desc: "An innovative management simulation featuring a unique 2.5D visual style. Step into the role of a service clerk and navigate complex customer interactions in this satirical take on corporate bureaucracy and resource management.",
+        features: ["Hybrid 2.5D visual style combining pixel art and 3D", "Fast-paced resource and time management", "Satirical narrative and moral dilemmas", "Detailed simulated UI systems"],
+        year: "2025", tools: "Unity, C#", roles: "Lead Developer, Lead Designer, Artist, Sound Director, Sound Artist, UI/UX", platform: "PC, Windows",
+        images: ["Images/Portfolio/Games/ScreenShots/CustomerID/Customer ID Thumbnail.png", "Images/Portfolio/Games/ScreenShots/CustomerID/Screenshots_CustomerID (1).png"],
+        cardVideo: '<iframe src="https://www.youtube.com/embed/B41cx9-olHE?autoplay=1&mute=1&loop=1&playlist=B41cx9-olHE&controls=0&disablekb=1&fs=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media" tabindex="-1"></iframe>',
+        videoHTML: '<iframe src="https://www.youtube.com/embed/B41cx9-olHE?autoplay=1" allow="autoplay; fullscreen" allowfullscreen style="width:100%;height:100%;border:none;"></iframe>'
+      },
+      "space-shooter": {
+        title: "Space Shooter",
+        desc: "A retro-inspired arcade space shooter featuring intense projectile physics and wave-based combat. Navigate asteroid fields, upgrade your ship, and defeat massive bosses in this fast-paced action classic.",
+        features: ["Classic arcade shoot 'em up mechanics", "Custom projectile physics and collision systems", "Progressive difficulty scaling", "Engaging boss fights"],
+        year: "2024", tools: "Unity, C#", roles: "UI/UX, Lead Dev, Lead Game Designer", platform: "PC, Windows",
+        images: ["Images/Portfolio/Games/ScreenShots/Space Shooter/image_2026-03-18_013238216.png"],
+        cardVideo: '<video src="Images/Portfolio/Games/Videos/SpaceShooter.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;pointer-events:none;"></video>',
+        videoHTML: '<video src="Images/Portfolio/Games/Videos/SpaceShooter.mp4" controls style="width:100%;height:100%;object-fit:contain;background:#000;outline:none;border:none;"></video>'
+      },
+      "scatter": {
+        title: "Scatter",
+        desc: "A chaotic, fast-paced action project where precision and quick thinking are key. Navigate the madness, outmaneuver your opponents, and secure your victory in this intense experience.",
+        features: ["Frantic and fast-paced gameplay", "Competitive challenges and dynamic map interactions", "Vibrant and colorful visual style", "Intense strategic decision making"],
+        year: "2025", tools: "Unity, C#", roles: "UI/UX, Lead Dev, Lead Game Designer", platform: "PC, Windows",
+        images: ["Images/Portfolio/Games/ScreenShots/Scatter/Thumnail.jpg"],
+        cardVideo: '<iframe src="https://www.youtube.com/embed/D9J8WLaYLag?autoplay=1&mute=1&loop=1&playlist=D9J8WLaYLag&controls=0&disablekb=1&fs=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media" tabindex="-1"></iframe>',
+        videoHTML: '<iframe src="https://www.youtube.com/embed/D9J8WLaYLag?autoplay=1" allow="autoplay; fullscreen" allowfullscreen style="width:100%;height:100%;border:none;"></iframe>'
+      }
+    };
+
+    const artworksData = {
+      photography: {
+        "00 Qan(T)": ["IMG_0943.jpg", "IMG_0948.jpg", "IMG_0958.jpg"],
+        "God Gundam": ["IMG_9287.jpg", "IMG_9301.jpg", "IMG_9302.jpg"],
+        "Gundam Aerial": ["IMG_7726.jpg", "IMG_7736.jpg", "IMG_7750.jpg"],
+        "Gundam Bael": ["IMG_1207.jpg", "IMG_1208.jpg"],
+        "Gundam Calibarn": ["IMG_6768.jpg", "IMG_6790.jpg", "IMG_6797.jpg"],
+        "Liber Bishop": ["IMG_5994.jpg", "IMG_6032.jpg"],
+        "RX 78 (G)E Gundam Ex": ["IMG_5482.jpg", "IMG_5483.jpg"],
+        "RX 93 Gundam Nu": ["IMG_1240.jpg", "IMG_1256.jpg", "IMG_1262.jpg"],
+        "Wing Gundam": ["IMG_0847.jpg", "IMG_0854.jpg", "IMG_0903.jpg", "IMG_0908.jpg"]
+      },
+      art: [
+        "Inktober 2025.jpg", "Inktober Frog.jpg", "Inktober Monster.jpg", "Inktober No Face.jpg",
+        "Inktober Snake.jpg", "Inktober Tanjiro.jpg", "Inktober.jpg",
+        "MAP of redsoul wall.png", "Under My Blanket Dital Art.jpg", "Under My Blanket Traditional.jpg"
+      ],
+      audio: [
+        { file: "80s_BGM_2.mp3", thumb: "thumb_80s_BGM_2.png", title: "80s BGM" },
+        { file: "Nico.mp3", thumb: "thumb_Nico.png", title: "Nico Acoustic" },
+        { file: "Nico2.mp3", thumb: "thumb_Nico2.png", title: "Nico Lofi" },
+        { file: "Retro_BGM_2.mp3", thumb: "thumb_Retro_BGM_2.png", title: "Retro Arcade BGM" },
+        { file: "Rizal_BGM.mp3", thumb: "thumb_Rizal_BGM.png", title: "Rizal Epic Monument" }
+      ],
+      vfx: {
+        "vfx-fireworks-2": {
+          title: "Fireworks Activity", desc: "A stylized fireworks display created in Unity 6 using VFX Graph.",
+          tools: "Unity 6, VFX Graph", year: "2025",
+          cardVideo: '<video src="Images/Portfolio/Artworks/VFX/EDU_Activity2_Fireworks.mp4" autoplay loop muted playsinline style="width:100%; height:100%; object-fit:cover; pointer-events:none;"></video>',
+          videoHTML: '<video src="Images/Portfolio/Artworks/VFX/EDU_Activity2_Fireworks.mp4" controls autoplay loop playsinline style="width:100%; height:100%; object-fit:contain; background:#000;"></video>'
+        },
+        "vfx-explosion": {
+          title: "Dynamic Explosion", desc: "A powerful dynamic explosion created in Unity 6 using VFX Graph.",
+          tools: "Unity 6, VFX Graph", year: "2025",
+          cardVideo: '<video src="Images/Portfolio/Artworks/VFX/EDU_Explosion.mov" autoplay loop muted playsinline style="width:100%; height:100%; object-fit:cover; pointer-events:none;"></video>',
+          videoHTML: '<video src="Images/Portfolio/Artworks/VFX/EDU_Explosion.mov" controls autoplay loop playsinline style="width:100%; height:100%; object-fit:contain; background:#000;"></video>'
+        },
+        "vfx-fireworks": {
+          title: "Fireworks VFX", desc: "Complex particle-based fireworks created in Unity 6 using VFX Graph.",
+          tools: "Unity 6, VFX Graph", year: "2025",
+          cardVideo: '<video src="Images/Portfolio/Artworks/VFX/EDU_Fireworks.mp4" autoplay loop muted playsinline style="width:100%; height:100%; object-fit:cover; pointer-events:none;"></video>',
+          videoHTML: '<video src="Images/Portfolio/Artworks/VFX/EDU_Fireworks.mp4" controls autoplay loop playsinline style="width:100%; height:100%; object-fit:contain; background:#000;"></video>'
+        },
+        "vfx-lightning": {
+          title: "Procedural Lightning", desc: "Procedural lightning strike effects created in Unity 6 using VFX Graph.",
+          tools: "Unity 6, VFX Graph", year: "2025",
+          cardVideo: '<video src="Images/Portfolio/Artworks/VFX/EDU_Lightning.mp4" autoplay loop muted playsinline style="width:100%; height:100%; object-fit:cover; pointer-events:none;"></video>',
+          videoHTML: '<video src="Images/Portfolio/Artworks/VFX/EDU_Lightning.mp4" controls autoplay loop playsinline style="width:100%; height:100%; object-fit:contain; background:#000;"></video>'
+        },
+        "vfx-lightning-graph": {
+          title: "VFX Graph System", desc: "Advanced procedural lightning graph and logic system created in Unity 6.",
+          tools: "Unity 6, VFX Graph", year: "2025",
+          cardVideo: '<video src="Images/Portfolio/Artworks/VFX/EDU_LightningVFXGraph.mp4" autoplay loop muted playsinline style="width:100%; height:100%; object-fit:cover; pointer-events:none;"></video>',
+          videoHTML: '<video src="Images/Portfolio/Artworks/VFX/EDU_LightningVFXGraph.mp4" controls autoplay loop playsinline style="width:100%; height:100%; object-fit:contain; background:#000;"></video>'
+        }
+      }
+    };
+
+    const websitesData = {
+      nestly: {
+        title: "Nestly App", desc: "A sleek mobile application designed to simplify home organization and property management. Features a clean, intuitive interface with real-time notifications and community tracking.",
+        features: ["Intuitive mobile-first design", "Secure user authentication & data storage", "Real-time updates and notifications", "Clean, minimalist aesthetic"],
+        year: "2025", tools: "Figma, React Native", roles: "UI/UX, Frontend Developer", platform: "iOS, Android",
+        images: ["Images/Portfolio/Websites/Nestly%20App.mp4"],
+        cardVideo: '<video src="Images/Portfolio/Websites/Nestly%20App.mp4" autoplay loop muted playsinline class="site-media" style="width:100%;height:100%;object-fit:cover;"></video>',
+        videoHTML: '<video src="Images/Portfolio/Websites/Nestly%20App.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"></video>'
+      },
+      tequila: {
+        title: "Tequila Sunrise", desc: "A vibrant and energetic website capturing the essence of the Tequila Sunrise spirit. High-impact visuals meeting professional development standards for a compelling brand story.",
+        features: ["High-impact visual design", "Responsive mobile-friendly layout", "Smooth scroll animations", "Optimized media delivery"],
+        year: "2024", tools: "HTML, CSS, JS", roles: "Lead Developer", platform: "Web",
+        images: ["Images/Portfolio/Websites/Website_TequilaSunrise.mp4"],
+        cardVideo: '<video src="Images/Portfolio/Websites/Website_TequilaSunrise.mp4" autoplay loop muted playsinline class="site-media" style="width:100%;height:100%;object-fit:cover;"></video>',
+        videoHTML: '<video src="Images/Portfolio/Websites/Website_TequilaSunrise.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"></video>'
+      },
+      final: {
+        title: "Pacific Crossing", desc: "Discover the unique culinary experience of this fusion restaurant platform. Bringing together the best of Japanese, Chinese, and Filipino cuisines.",
+        features: ["Modern fusion restaurant frontend", "Appetizing visual hierarchy", "Engaging promotional banners"],
+        year: "2024", tools: "HTML, CSS, JS", roles: "Lead Programmer", platform: "Desktop, Mobile",
+        images: ["https://img.youtube.com/vi/ndlmMfa2f6Y/maxresdefault.jpg"],
+        cardVideo: '<iframe src="https://www.youtube.com/embed/ndlmMfa2f6Y?autoplay=1&mute=1&loop=1&playlist=ndlmMfa2f6Y&controls=0&disablekb=1&fs=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media" tabindex="-1" class="site-media" style="width:100%;height:100%;border:none;"></iframe>',
+        videoHTML: '<iframe src="https://www.youtube.com/embed/ndlmMfa2f6Y?autoplay=1" allow="autoplay; fullscreen" allowfullscreen style="width:100%;height:100%;border:none;"></iframe>'
+      },
+      royal: {
+        title: "Royal Oak", desc: "A premium hotel website that caters to a diverse clientele, offering luxurious accommodations alongside affordable room tiers.",
+        features: ["Elegant, nature-inspired visual design", "Flexible booking options", "Responsive multimedia galleries"],
+        year: "2024", tools: "HTML, CSS, JS", roles: "Programmer", platform: "Desktop, Mobile",
+        images: ["https://img.youtube.com/vi/qE3psGruiyg/maxresdefault.jpg"],
+        cardVideo: '<iframe src="https://www.youtube.com/embed/qE3psGruiyg?autoplay=1&mute=1&loop=1&playlist=qE3psGruiyg&controls=0&disablekb=1&fs=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media" tabindex="-1" class="site-media" style="width:100%;height:100%;border:none;"></iframe>',
+        videoHTML: '<iframe src="https://www.youtube.com/embed/qE3psGruiyg?autoplay=1" allow="autoplay; fullscreen" allowfullscreen style="width:100%;height:100%;border:none;"></iframe>'
+      }
+    };
+
+    /* ─── Populate Grids ────────────────────────────── */
+    const photoGrid = document.getElementById('grid-photography');
+    const artGrid   = document.getElementById('grid-art');
+    const audioGrid = document.getElementById('grid-audio');
+    const gamesGrid = document.getElementById('grid-games');
+    const sitesGrid = document.getElementById('grid-websites');
+    const vfxGrid   = document.getElementById('grid-vfx');
+
+    // 1. Populate Games
+    Object.keys(gameData).forEach(id => {
+      const data = gameData[id];
+      const card = document.createElement('div');
+      card.className = 'hub-card';
+      card.setAttribute('data-game', id);
+      card.innerHTML = `
+        <div class="hub-video-wrap">
+          ${data.cardVideo}
+          <div class="hub-overlay"><span class="hub-more-info">↗ MORE INFO</span></div>
+        </div>
+        <h3 class="hub-title">${data.title}</h3>
+      `;
+      gamesGrid.appendChild(card);
+    });
+
+    // 2. Populate Photography (Nested)
+    Object.keys(artworksData.photography).forEach((categoryName, index) => {
+      const subCatWrap = document.createElement('div');
+      subCatWrap.className = 'sub-category-wrap';
+      const subCatId = 'hub-photo-cat-' + index;
+      const firstImg = artworksData.photography[categoryName][0];
+      
+      subCatWrap.innerHTML = `
+        <button class="cat-banner-btn sub-cat-banner-btn" aria-expanded="false" data-target="${subCatId}">
+          <div class="cat-banner-bg" style="background-image: url('Images/Portfolio/Artworks/Photography/${categoryName}/${firstImg}');"></div>
+          <div class="cat-banner-overlay"></div>
+          <h3 class="cat-banner-title sub-cat-title-text">${categoryName}</h3>
+          <span class="sub-cat-icon">+</span>
+        </button>
+        <div class="sub-cat-content" id="${subCatId}">
+          <div class="sub-cat-grid"></div>
+        </div>
+      `;
+      
+      const subGrid = subCatWrap.querySelector('.sub-cat-grid');
+      artworksData.photography[categoryName].forEach(file => {
+        const item = document.createElement('div');
+        item.className = 'art-item';
+        item.innerHTML = `<img src="Images/Portfolio/Artworks/Photography/${categoryName}/${file}" class="zoomable-img" />`;
+        subGrid.appendChild(item);
+      });
+      photoGrid.appendChild(subCatWrap);
+    });
+
+    // 3. Populate Art
+    artworksData.art.forEach(file => {
+      const item = document.createElement('div');
+      item.className = 'art-item';
+      item.innerHTML = `<img src="Images/Portfolio/Artworks/Art/${file}" class="zoomable-img" />`;
+      artGrid.appendChild(item);
+    });
+
+    // 4. Populate Audio
+    artworksData.audio.forEach(audioObj => {
+      const item = document.createElement('div');
+      item.className = 'audio-item';
+      item.innerHTML = `
+        <div class="audio-thumb-wrap">
+          <img src="Images/Portfolio/Artworks/Audio/${audioObj.thumb}" alt="${audioObj.title}" />
+          <div class="audio-overlay"><span class="audio-icon">▶ PLAYING</span></div>
+        </div>
+        <h3 class="audio-title">${audioObj.title}</h3>
+        <audio class="hidden-audio" src="Images/Portfolio/Artworks/Audio/${audioObj.file}" preload="none"></audio>
+      `;
+      const audio = item.querySelector('audio');
+      item.onmouseenter = () => { 
+        audio.play().catch(e => {}); 
+        item.classList.add('playing');
+      };
+      item.onmouseleave = () => { 
+        audio.pause(); 
+        audio.currentTime = 0; 
+        item.classList.remove('playing');
+      };
+      audioGrid.appendChild(item);
+    });
+
+    // 5. Populate Websites
+    Object.keys(websitesData).forEach(id => {
+      const data = websitesData[id];
+      const card = document.createElement('article');
+      card.className = 'website-card';
+      card.setAttribute('data-website', id);
+      card.innerHTML = `
+        <div class="site-media-wrap" style="height: 100%; width: 100%;">
+           ${data.cardVideo}
+        </div>
+        <div class="site-overlay"><h3>${data.title}</h3><p>${data.platform}</p></div>
+      `;
+      sitesGrid.appendChild(card);
+    });
+
+    // 6. Populate VFX
+    Object.keys(artworksData.vfx).forEach(id => {
+      const data = artworksData.vfx[id];
+      const card = document.createElement('div');
+      card.className = 'hub-card';
+      card.setAttribute('data-vfx', id);
+      card.innerHTML = `
+        <div class="hub-video-wrap">
+          ${data.cardVideo}
+          <div class="hub-overlay"><span class="hub-more-info">↗ VIEW DETAILS</span></div>
+        </div>
+        <h3 class="hub-title">${data.title}</h3>
+      `;
+      vfxGrid.appendChild(card);
+    });
+
+    /* ─── Global Accordion Logic ─────────────────────── */
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.cat-banner-btn');
+      if (!btn) return;
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', !isExpanded);
+      const icon = btn.querySelector('.sub-cat-icon');
+      if (icon) icon.textContent = isExpanded ? '+' : '-';
+      const target = document.getElementById(btn.getAttribute('data-target'));
+      if (target) {
+        if (!isExpanded) {
+          target.style.maxHeight = target.scrollHeight + "px";
+          setTimeout(() => { target.style.maxHeight = "none"; }, 400);
+          const parent = btn.closest('.cat-content');
+          if (parent) parent.style.maxHeight = 'none';
+        } else {
+          target.style.maxHeight = target.scrollHeight + "px";
+          target.offsetHeight;
+          target.style.maxHeight = "0";
+        }
+      }
+    });
+
+    /* ─── Modals Logic ───────────────────────────────── */
+    const showGameModal = (id) => {
+      const data = gameData[id];
+      const modal = document.getElementById('game-modal');
+      const videoWrap = document.getElementById('modal-game-video-wrap');
+      const heroImg = document.getElementById('modal-game-hero-img');
+      
+      videoWrap.innerHTML = data.videoHTML;
+      if (data.images && data.images[0]) {
+        heroImg.src = data.images[0];
+        heroImg.style.display = data.videoHTML ? 'none' : 'block';
+      } else {
+        heroImg.style.display = 'none';
+      }
+
+      document.getElementById('modal-game-title').textContent = data.title;
+      document.getElementById('modal-game-desc').textContent = data.desc;
+      document.getElementById('modal-game-year').textContent = data.year;
+      document.getElementById('modal-game-tools').textContent = data.tools;
+      
+      // Update info right based on item type
+      const rolesBlock = document.getElementById('modal-game-roles').parentElement;
+      const platformBlock = document.getElementById('modal-game-platform').parentElement;
+
+      if (id.startsWith('vfx-')) {
+        rolesBlock.style.display = 'none';
+        platformBlock.style.display = 'none';
+      } else {
+        rolesBlock.style.display = 'block';
+        platformBlock.style.display = 'block';
+        document.getElementById('modal-game-roles').textContent = data.roles;
+        document.getElementById('modal-game-platform').textContent = data.platform;
+      }
+      
+      modal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const showVfxModal = (id) => {
+      const vfxInfo = artworksData.vfx[id];
+      showGameModal(id); // Reuse game modal but custom logic inside handles hiding blocks
+    };
+
+    const showWebsiteModal = (id) => {
+      const data = websitesData[id];
+      const modal = document.getElementById('website-modal');
+      const videoWrap = document.getElementById('modal-site-video-wrap');
+      const heroImg = document.getElementById('modal-site-hero-img');
+      
+      videoWrap.innerHTML = data.videoHTML;
+      heroImg.src = data.images[0];
+      
+      document.getElementById('modal-site-title').textContent = data.title;
+      document.getElementById('modal-site-desc').textContent = data.desc;
+      document.getElementById('modal-site-year').textContent = data.year;
+      document.getElementById('modal-site-tools').textContent = data.tools;
+      document.getElementById('modal-site-roles').textContent = data.roles;
+      document.getElementById('modal-site-platform').textContent = data.platform;
+      
+      modal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    };
+
+    document.addEventListener('click', e => {
+      const gameCard = e.target.closest('.hub-card');
+      const siteCard = e.target.closest('.website-card');
+      if (gameCard) {
+        const id = gameCard.getAttribute('data-game') || gameCard.getAttribute('data-vfx');
+        if (gameCard.hasAttribute('data-vfx')) {
+          const vfxData = artworksData.vfx[id];
+          // We need gameData but for VFX.
+          // I'll merge it into a temporary object or just use artworksData.vfx.
+          // Let's modify showGameModal to accept the data directly or find it.
+          const modalData = gameData[id] || artworksData.vfx[id];
+          
+          const modal = document.getElementById('game-modal');
+          const videoWrap = document.getElementById('modal-game-video-wrap');
+          const heroImg = document.getElementById('modal-game-hero-img');
+          
+          videoWrap.innerHTML = modalData.videoHTML;
+          heroImg.style.display = 'none';
+          
+          document.getElementById('modal-game-title').textContent = modalData.title;
+          document.getElementById('modal-game-desc').textContent = modalData.desc;
+          document.getElementById('modal-game-year').textContent = modalData.year;
+          document.getElementById('modal-game-tools').textContent = modalData.tools;
+          
+          document.getElementById('modal-game-roles').parentElement.style.display = 'none';
+          document.getElementById('modal-game-platform').parentElement.style.display = 'none';
+          
+          modal.classList.add('show');
+          document.body.style.overflow = 'hidden';
+        } else {
+          showGameModal(id);
+        }
+      }
+      if (siteCard) showWebsiteModal(siteCard.getAttribute('data-website'));
+    });
+
+    document.querySelectorAll('.modal-close').forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll('.game-modal').forEach(m => m.classList.remove('show'));
+        document.body.style.overflow = '';
+        setTimeout(() => { 
+          document.getElementById('modal-game-video-wrap').innerHTML = '';
+          document.getElementById('modal-site-video-wrap').innerHTML = '';
+        }, 300);
+      };
+    });
+
+    /* ─── Lightbox ───────────────────────────────────── */
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    document.addEventListener('click', e => {
+      if (e.target.classList.contains('zoomable-img')) {
+        lightboxImg.src = e.target.src;
+        lightbox.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+    document.getElementById('lightbox-close').onclick = () => {
+      lightbox.classList.remove('show');
+      document.body.style.overflow = '';
+    };
+
+    /* ─── Init Particles ───────────────────────────────── */
+    const pContainer = document.getElementById('particles-container');
+    const PARTICLE_COUNT = 80;
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.top = Math.random() * 100 + 'vh';
+      const dur = 4 + Math.random() * 6;
+      const delay = Math.random() * 8;
+      const size = Math.random() * 2 + 1;
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.animation = `particleFloat ${dur}s linear ${delay}s infinite`;
+      pContainer.appendChild(p);
+    }
+
+    /* ─── WebGL Liquid Shader (Black, Orange, Purple) ─ */
+    const canvas = document.getElementById('glcanvas');
+    if (canvas) {
+      const gl = canvas.getContext('webgl');
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+      const vsSource = `attribute vec4 aVertexPosition; void main() { gl_Position = aVertexPosition; }`;
+      const fsSource = `
+        precision highp float;
+        uniform vec2 u_resolution;
+        uniform float u_time;
+        vec2 hash(vec2 p) {
+          p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
+          return -1.0 + 2.0 * fract(sin(p) * 43758.5453123);
+        }
+        float noise(vec2 p) {
+          const float K1 = 0.366025404; const float K2 = 0.211324865;
+          vec2 i = floor(p + (p.x + p.y) * K1); vec2 a = p - i + (i.x + i.y) * K2;
+          float m = step(a.y, a.x); vec2 o = vec2(m, 1.0 - m);
+          vec2 b = a - o + K2; vec2 c = a - 1.0 + 2.0 * K2;
+          vec3 h = max(0.5 - vec3(dot(a,a), dot(b,b), dot(c,c)), 0.0);
+          vec3 n = h*h*h*h * vec3(dot(a, hash(i+0.0)), dot(b, hash(i+o)), dot(c, hash(i+1.0)));
+          return dot(n, vec3(70.0));
+        }
+        float fbm(vec2 uv) {
+          float f = 0.0; mat2 m = mat2(1.6, 1.2, -1.2, 1.6);
+          f += 0.5000 * noise(uv); uv = m * uv; f += 0.2500 * noise(uv); uv = m * uv;
+          f += 0.1250 * noise(uv); uv = m * uv; f += 0.0625 * noise(uv); uv = m * uv;
+          return f;
+        }
+        void main() {
+          vec2 st = gl_FragCoord.xy / u_resolution.y;
+          vec2 q = vec2(0.); q.x = fbm(st + 0.02 * u_time); q.y = fbm(st + vec2(1.0));
+          vec2 r = vec2(0.);
+          r.x = fbm(st + 1.0 * q + vec2(1.7, 9.2) + 0.12 * u_time);
+          r.y = fbm(st + 1.0 * q + vec2(8.3, 2.8) + 0.10 * u_time);
+          float f = fbm(st + r);
+          float veins = abs(sin(f * 3.0 + u_time * 0.3));
+          veins = smoothstep(0.93, 1.0, veins); 
+          float faintVeins = smoothstep(0.85, 1.0, abs(sin(f * 6.0 - u_time * 0.1))) * 0.2;
+          float fluid = veins + faintVeins;
+          vec3 baseColor = vec3(0.01, 0.01, 0.01);
+          vec3 orangeColor = vec3(1.0, 0.4, 0.0);
+          vec3 purpleColor = vec3(0.6, 0.1, 0.9);
+          vec3 col = mix(baseColor, orangeColor, fluid);
+          col = mix(col, purpleColor, smoothstep(0.97, 1.0, abs(sin(f * 3.0 + u_time * 0.3))));
+          col *= 0.55; 
+          vec2 center = gl_FragCoord.xy / u_resolution.xy - 0.5;
+          col *= 1.0 - dot(center, center) * 1.5;
+          gl_FragColor = vec4(col, 1.0);
+        }
+      `;
+      function loadShader(gl, type, source) {
+        const shader = gl.createShader(type); gl.shaderSource(shader, source); gl.compileShader(shader);
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) return null;
+        return shader;
+      }
+      const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vsSource);
+      const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
+      const shaderProgram = gl.createProgram();
+      gl.attachShader(shaderProgram, vertexShader); gl.attachShader(shaderProgram, fragmentShader);
+      gl.linkProgram(shaderProgram); gl.useProgram(shaderProgram);
+      const positionBuffer = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+      const positions = [ -1.0, 1.0, 1.0, 1.0, -1.0, -1.0, 1.0, -1.0 ];
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+      const vertexPosition = gl.getAttribLocation(shaderProgram, 'aVertexPosition');
+      gl.vertexAttribPointer(vertexPosition, 2, gl.FLOAT, false, 0, 0); gl.enableVertexAttribArray(vertexPosition);
+      const uResolution = gl.getUniformLocation(shaderProgram, 'u_resolution'); const uTime = gl.getUniformLocation(shaderProgram, 'u_time');
+      let startTime = Date.now();
+      function renderGL() {
+        gl.uniform2f(uResolution, canvas.width, canvas.height); gl.uniform1f(uTime, (Date.now() - startTime) / 1000.0);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); requestAnimationFrame(renderGL);
+      }
+      renderGL();
+    }
+  </script>
+</body>
+</html>
