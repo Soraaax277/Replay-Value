@@ -1175,6 +1175,8 @@
       padding: 16px;
       opacity: 0;
       transition: opacity 0.3s var(--ease);
+      pointer-events: auto; /* Ensure clicks are captured even when opacity is 0 */
+      cursor: pointer;
     }
 
     .hub-more-info {

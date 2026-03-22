@@ -226,79 +226,7 @@
   </div>
 
   <script>
-    /* ─── Slideshow Data ──────────────────────────────── */
-    const slides = [
-      { src: 'Images/Index_Slideshow/MainMenuBG.png',           caption: 'Game Dev' },
-      { src: 'Images/Index_Slideshow/main menu bg.png',         caption: 'UI Design' },
-      { src: 'Images/Index_Slideshow/TITLECARD (1).png',        caption: 'Title Card Art' },
-      { src: 'Images/Index_Slideshow/Screenshot 2026-03-20 232829.png', caption: 'Project Showcase' },
-      { src: 'Images/Index_Slideshow/UnderMyBlanketDigi.jpg',   caption: 'Digital Art' },
-      { src: 'Images/Index_Slideshow/Customer ID Thumbnail.png',caption: 'Multimedia' },
-    ];
-
-    const INTERVAL = 3000; // ms between auto-advance
-    const container   = document.getElementById('slides-container');
-    const dotWrap     = document.getElementById('dot-container');
-    const progressBar = document.getElementById('progress-bar');
-    const captionEl   = document.getElementById('slide-caption-text');
-
-    let current = 0;
-
-    /* ── Build DOM ───────────────────────────────────── */
-    const slideEls = slides.map((s, i) => {
-      const el = document.createElement('div');
-      el.className = 'slide' + (i === 0 ? ' active' : '');
-      el.style.backgroundImage = `url('${s.src}')`;
-      el.setAttribute('role', 'img');
-      el.setAttribute('aria-label', s.caption);
-      container.appendChild(el);
-      return el;
-    });
-
-    const dots = slides.map((_, i) => {
-      const btn = document.createElement('button');
-      btn.className = 'dot' + (i === 0 ? ' active' : '');
-      btn.setAttribute('role', 'tab');
-      btn.setAttribute('aria-label', `Slide ${i + 1}`);
-      btn.addEventListener('click', () => goTo(i));
-      if (dotWrap) dotWrap.appendChild(btn);
-      return btn;
-    });
-
-    /* ── Progress bar ────────────────────────────────── */
-    function startProgress() {
-      if (!progressBar) return;
-      progressBar.style.transition = 'none';
-      progressBar.style.width = '0%';
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        progressBar.style.transition = `width ${INTERVAL}ms linear`;
-        progressBar.style.width = '100%';
-      }));
-    }
-
-    /* ── Go to slide ─────────────────────────────────── */
-    function goTo(index) {
-      const next = (index + slides.length) % slides.length;
-      if (next === current) return;
-
-      slideEls[current].classList.remove('active');
-      slideEls[current].classList.add('exit');
-      dots[current].classList.remove('active');
-      const old = slideEls[current];
-      setTimeout(() => old.classList.remove('exit'), 1000);
-
-      current = next;
-      slideEls[current].classList.add('active');
-      dots[current].classList.add('active');
-      if (captionEl) captionEl.textContent = slides[current].caption;
-      startProgress();
-    }
-
-    if (captionEl) captionEl.textContent = slides[0].caption;
-
-    /* ── Un-stoppable auto-advance ───────────────────── */
-    setInterval(() => goTo(current + 1), INTERVAL);
-    startProgress();
+    /* ─── Lightbox JS ──────────────────────────────────── */
 
 
     /* ── Lightbox JS ──────────────────────────────────── */
@@ -334,27 +262,8 @@
 
     // Keyboard navigation (Escape to close)
     document.addEventListener('keydown', e => {
-      if (e.key === 'ArrowLeft')  prev();
-      if (e.key === 'ArrowRight') next();
       if (e.key === 'Escape' && lightbox.classList.contains('show')) closeLightbox();
     });
-
-    /* ── Touch / swipe support ─────────────────────────── */
-    let touchStartX = 0;
-    const hero = document.getElementById('hero');
-    if (hero) {
-      hero.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
-      hero.addEventListener('touchend',   e => {
-        const dx = e.changedTouches[0].clientX - touchStartX;
-        if (Math.abs(dx) > 50) { dx < 0 ? next() : prev(); }
-      }, { passive: true });
-    }
-
-    /* ── Pause on hover ────────────────────────────────── */
-    if (hero) {
-      hero.addEventListener('mouseenter', () => clearInterval(timer));
-      hero.addEventListener('mouseleave', () => resetTimer());
-    }
 
     /* ── Gallery JS ───────────────────────────────────── */
     document.querySelectorAll('.game-gallery').forEach(gallery => {
@@ -404,11 +313,6 @@
         }, 1500);
       }
     }, { passive: true });
-
-    /* ── Init ─────────────────────────────────────────── */
-    if (captionEl) captionEl.textContent = slides[0].caption;
-    resetTimer();
-    startProgress();
 
     /* ── Init Particles ───────────────────────────────── */
     const pContainer = document.getElementById('particles-container');
@@ -666,6 +570,7 @@
     document.querySelectorAll('.hub-card').forEach(card => {
       card.addEventListener('click', (e) => {
         const gameId = card.getAttribute('data-game');
+        console.log(`Game card clicked: ${gameId}`);
         const data = gameData[gameId];
         
         if (data) {
