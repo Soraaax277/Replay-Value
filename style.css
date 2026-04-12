@@ -1569,9 +1569,21 @@
 
     .cat-inner-audio {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
       padding: 20px;
+    }
+
+    @media (max-width: 1024px) {
+      .cat-inner-audio {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .cat-inner-audio {
+        grid-template-columns: 1fr;
+      }
     }
 
     .cat-inner-list {
@@ -1756,6 +1768,49 @@
       font-size: 1.1rem;
       text-shadow: 0 0 10px #0f0;
       animation: pulse 1s infinite alternate;
+    }
+
+    /* ─── Volume Slider ─── */
+    .volume-controls {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    .audio-item:hover .volume-controls,
+    .audio-item.playing .volume-controls {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .volume-slider {
+      flex: 1;
+      -webkit-appearance: none;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.1);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--clr-accent2);
+      box-shadow: 0 0 8px var(--clr-accent2);
+      transition: transform 0.2s;
+    }
+
+    .volume-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
     }
 
     /* ─── Websites Hub ─────────────────────────────────── */

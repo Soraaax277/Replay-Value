@@ -70,7 +70,7 @@
       <!-- 4. AUDIO CATEGORY -->
       <div class="art-category">
         <button class="cat-banner-btn" aria-expanded="false" data-target="cat-audio">
-          <div class="cat-banner-bg" style="background-image: url('Images/Portfolio/Artworks/Audio/thumb_80s_BGM_2.png'); background-position: center; background-size: cover;"></div>
+          <div class="cat-banner-bg" style="background-image: url('Images/Portfolio/Artworks/Audio/Thumbnail for all the music.png'); background-position: center; background-size: cover;"></div>
           <div class="cat-banner-overlay"></div>
           <h2 class="cat-banner-title">AUDIO & MUSIC</h2>
         </button>
@@ -262,11 +262,18 @@
         "MAP of redsoul wall.png", "Under My Blanket Dital Art.jpg", "Under My Blanket Traditional.jpg"
       ],
       audio: [
-        { file: "80s_BGM_2.mp3", thumb: "thumb_80s_BGM_2.png", title: "80s BGM" },
-        { file: "Nico.mp3", thumb: "thumb_Nico.png", title: "Nico Acoustic" },
-        { file: "Nico2.mp3", thumb: "thumb_Nico2.png", title: "Nico Lofi" },
-        { file: "Retro_BGM_2.mp3", thumb: "thumb_Retro_BGM_2.png", title: "Retro Arcade BGM" },
-        { file: "Rizal_BGM.mp3", thumb: "thumb_Rizal_BGM.png", title: "Rizal Epic Monument" }
+        { file: "80s_BGM_2.mp3", thumb: "Thumbnail for all the music.png", title: "Signal Interference" },
+        { file: "Exodus_Victory_BGM.mp3", thumb: "Thumbnail for all the music.png", title: "Orbital Departure" },
+        { file: "Futuristic_BGM_1.mp3", thumb: "Thumbnail for all the music.png", title: "Neural Network Lockdown" },
+        { file: "Futuristic_BGM_2.mp3", thumb: "Thumbnail for all the music.png", title: "The Gateway Protocol" },
+        { file: "Industrial_BGM_2.mp3", thumb: "Thumbnail for all the music.png", title: "Crushing Weight of Progress" },
+        { file: "Liquidation_Victory_BGM_1.mp3", thumb: "Thumbnail for all the music.png", title: "Total Asset Strip" },
+        { file: "Liquidation_Victory_BGM_2.mp3", thumb: "Thumbnail for all the music.png", title: "Liquidation Victory BGM 2" },
+        { file: "Monopoly_Victory_BGM.mp3", thumb: "Thumbnail for all the music.png", title: "Hostile Takeover" },
+        { file: "Retro_BGM_2.mp3", thumb: "Thumbnail for all the music.png", title: "CPU Overclock" },
+        { file: "Rizal_BGM.mp3", thumb: "Thumbnail for all the music.png", title: "Rizal Epic Monument" },
+        { file: "something in the middle.mp3", thumb: "teacups and paper towels, something in the middle.png", title: "something in the middle" },
+        { file: "teacups and paper towels.mp3", thumb: "teacups and paper towels, something in the middle.png", title: "teacups and paper towels" }
       ],
       vfx: {
         "vfx-fireworks-2": {
@@ -404,13 +411,28 @@
       item.className = 'audio-item';
       item.innerHTML = `
         <div class="audio-thumb-wrap">
-          <img src="Images/Portfolio/Artworks/Audio/${audioObj.thumb}" alt="${audioObj.title}" />
-          <div class="audio-overlay"><span class="audio-icon">▶ PLAYING</span></div>
+          <img src="Images/Portfolio/Artworks/Audio/${audioObj.thumb}" alt="${audioObj.title}" loading="lazy" />
+          <div class="audio-overlay">
+            <span class="audio-icon">▶ PLAYING</span>
+          </div>
         </div>
         <h3 class="audio-title">${audioObj.title}</h3>
+        <div class="volume-controls">
+          <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="1">
+        </div>
         <audio class="hidden-audio" src="Images/Portfolio/Artworks/Audio/${audioObj.file}" preload="none"></audio>
       `;
       const audio = item.querySelector('audio');
+      const volumeSlider = item.querySelector('.volume-slider');
+      
+      volumeSlider.addEventListener('input', (e) => {
+        audio.volume = e.target.value;
+      });
+
+      // Prevent card click/hover reset when interacting with slider
+      volumeSlider.addEventListener('click', (e) => e.stopPropagation());
+      volumeSlider.addEventListener('mouseenter', (e) => e.stopPropagation());
+
       item.onmouseenter = () => { 
         audio.play().catch(e => {}); 
         item.classList.add('playing');
