@@ -537,14 +537,16 @@
       background: #000;
     }
 
-    .main-display img {
+    .main-display img,
+    .main-display video {
       width: 100%;
       height: 100%;
       object-fit: contain; /* ensure full image is visible, or cover for edge-to-edge */
       transition: opacity 0.3s var(--ease);
     }
     
-    .main-display img.fade {
+    .main-display img.fade,
+    .main-display video.fade {
       opacity: 0;
     }
 

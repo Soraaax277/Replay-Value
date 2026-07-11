@@ -124,8 +124,8 @@ class SiteHeroSlideshow extends HTMLElement {
 
   initSlideshow() {
     const slides = [
+      { src: 'Images/Index_Slideshow/NetworkOverreach_Thumbnail.png', caption: 'Network Overreach' },
       { src: 'Images/Index_Slideshow/TITLECARD (1).png',        caption: 'Title Card Art' },
-      { src: 'Images/Index_Slideshow/MainMenuBG.png',           caption: 'Game Dev' },
       { src: 'Images/Index_Slideshow/UnderMyBlanketDigi.jpg',   caption: 'Digital Art' },
       { src: 'Images/Index_Slideshow/main menu bg.png',         caption: 'UI Design' },
       { src: 'Images/Index_Slideshow/Screenshot 2026-03-20 232829.png', caption: 'Project Showcase' },
@@ -136,6 +136,7 @@ class SiteHeroSlideshow extends HTMLElement {
     const container   = this.querySelector('.slides-container-scope');
     const progressBar = this.querySelector('.progress-bar');
     const captionEl   = this.querySelector('.slide-caption-text');
+    const dotWrap     = this.querySelector('.dot-container');
 
     let current = 0;
     const slideEls = [];
@@ -151,6 +152,20 @@ class SiteHeroSlideshow extends HTMLElement {
       slideEls.push(el);
     });
 
+    // Build dots DOM
+    let dots = [];
+    if (dotWrap) {
+      dots = slides.map((_, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'dot' + (i === 0 ? ' active' : '');
+        btn.setAttribute('role', 'tab');
+        btn.setAttribute('aria-label', `Slide ${i + 1}`);
+        btn.addEventListener('click', () => goTo(i));
+        dotWrap.appendChild(btn);
+        return btn;
+      });
+    }
+
     if (captionEl) captionEl.textContent = slides[0].caption;
 
     const startProgress = () => {
@@ -164,17 +179,22 @@ class SiteHeroSlideshow extends HTMLElement {
     };
 
     const goTo = (index) => {
+      const nextIndex = (index + slides.length) % slides.length;
+      if (nextIndex === current) return;
+
       // Remove active from old
       slideEls[current].classList.remove('active');
       slideEls[current].classList.add('exit');
-      // Clean up exit after transition
+      if (dots[current]) dots[current].classList.remove('active');
+      
       const old = slideEls[current];
       setTimeout(() => old.classList.remove('exit'), 1000);
 
-      current = (index + slides.length) % slides.length;
+      current = nextIndex;
 
       // Activate new slide
       slideEls[current].classList.add('active');
+      if (dots[current]) dots[current].classList.add('active');
       if (captionEl) captionEl.textContent = slides[current].caption;
       startProgress();
     };

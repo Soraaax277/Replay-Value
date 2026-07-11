@@ -10,7 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet" />
   <script src="components.js"></script>
-    <link rel="stylesheet" href="style.css" />
+  <script src="effects.js" defer></script>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <canvas id="glcanvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;"></canvas>
@@ -30,34 +31,35 @@
     </div>
 
     <div class="game-showcase">
-      <!-- MASK-A-RAID -->
+      <!-- NETWORK OVERREACH -->
       <article class="game-card">
-        <div class="game-gallery" data-gallery="mask-a-raid">
+        <div class="game-gallery" data-gallery="network-overreach">
           <div class="main-display">
-            <img src="Images/Featured Game/Mask-A-Raid/MainMenuBG.png" alt="Mask-A-Raid Main Image" loading="lazy" />
+            <video src="Images/Portfolio/Games/Videos/Network Overreach/NetworkOverreach_Trailer_1080p.mp4" autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;pointer-events:none;"></video>
           </div>
           <div class="thumb-strip">
-            <button class="thumb-btn active" data-src="Images/Featured Game/Mask-A-Raid/MainMenuBG.png" aria-label="View Main Menu">
-              <img src="Images/Featured Game/Mask-A-Raid/MainMenuBG.png" alt="Thumbnail" />
+            <button class="thumb-btn active" data-src="Images/Portfolio/Games/ScreenShots/NetworkOverreach/NetworkOverreach_MainMenu_Futuristic.png" aria-label="View Main Menu">
+              <img src="Images/Portfolio/Games/ScreenShots/NetworkOverreach/NetworkOverreach_MainMenu_Futuristic.png" alt="Thumbnail" />
             </button>
-            <button class="thumb-btn" data-src="Images/Featured Game/Mask-A-Raid/Screenshot1.png" aria-label="View Screenshot 1">
-              <img src="Images/Featured Game/Mask-A-Raid/Screenshot1.png" alt="Thumbnail" />
+            <button class="thumb-btn" data-src="Images/Portfolio/Games/ScreenShots/NetworkOverreach/NetworkOverreach_FuturisticEra_Scene.png" aria-label="View Futuristic Era">
+              <img src="Images/Portfolio/Games/ScreenShots/NetworkOverreach/NetworkOverreach_FuturisticEra_Scene.png" alt="Thumbnail" />
             </button>
-            <button class="thumb-btn" data-src="Images/Featured Game/Mask-A-Raid/Screenshot2.png" aria-label="View Screenshot 2">
-              <img src="Images/Featured Game/Mask-A-Raid/Screenshot2.png" alt="Thumbnail" />
+            <button class="thumb-btn" data-src="Images/Portfolio/Games/ScreenShots/NetworkOverreach/NetworkOverreach_TechTree.png" aria-label="View Tech Tree">
+              <img src="Images/Portfolio/Games/ScreenShots/NetworkOverreach/NetworkOverreach_TechTree.png" alt="Thumbnail" />
             </button>
-            <button class="thumb-btn" data-src="Images/Featured Game/Mask-A-Raid/Screenshot3.png" aria-label="View Screenshot 3">
-              <img src="Images/Featured Game/Mask-A-Raid/Screenshot3.png" alt="Thumbnail" />
+            <button class="thumb-btn" data-src="Images/Portfolio/Games/ScreenShots/NetworkOverreach/NetworkOverreach_Retro_Gameplay.png" aria-label="View Retro Gameplay">
+              <img src="Images/Portfolio/Games/ScreenShots/NetworkOverreach/NetworkOverreach_Retro_Gameplay.png" alt="Thumbnail" />
             </button>
           </div>
         </div>
         <div class="game-info">
-          <h3 data-text="Mask-A-Raid">Mask-A-Raid</h3>
-          <p>A game about surviving a bureaucratic apocalypse where the player uses social stealth and official (or undead) masks to bypass checkpoints and zombie hordes to reach evacuation.</p>
+          <h3 data-text="Network Overreach">Network Overreach</h3>
+          <p>A multi-era real-time strategy game where players build, expand, and dominate across evolving technological ages — from retro 8-bit circuits to futuristic neon networks. Featured at the Philippine GameDev Expo (PGDX) Indie Star 2026.</p>
           <div class="game-tags">
-            <span class="tag">Game Designer</span>
             <span class="tag">Lead Developer</span>
-            <span class="tag">Concept</span>
+            <span class="tag">Lead Designer</span>
+            <span class="tag">Technical Artist</span>
+            <span class="tag">Sound Director</span>
           </div>
         </div>
       </article>
@@ -320,7 +322,7 @@
 
     /* ── Gallery JS ───────────────────────────────────── */
     document.querySelectorAll('.game-gallery').forEach(gallery => {
-      const mainImg = gallery.querySelector('.main-display img');
+      const mainDisplay = gallery.querySelector('.main-display');
       const thumbs = gallery.querySelectorAll('.thumb-btn');
 
       thumbs.forEach(btn => {
@@ -331,12 +333,32 @@
           btn.classList.add('active');
 
           const newSrc = btn.getAttribute('data-src');
-          // Fade effect
-          mainImg.classList.add('fade');
-          setTimeout(() => {
-            mainImg.src = newSrc;
-            mainImg.classList.remove('fade');
-          }, 150);
+          const activeEl = mainDisplay.querySelector('img, video');
+
+          if (activeEl) {
+            activeEl.classList.add('fade');
+            setTimeout(() => {
+              const isVideo = newSrc && newSrc.toLowerCase().endsWith('.mp4');
+              if (isVideo) {
+                mainDisplay.innerHTML = `<video src="${newSrc}" autoplay loop muted playsinline></video>`;
+              } else {
+                mainDisplay.innerHTML = `<img src="${newSrc}" alt="Gallery Image" loading="lazy" />`;
+              }
+              const newEl = mainDisplay.querySelector('img, video');
+              if (newEl) {
+                newEl.classList.add('fade');
+                newEl.offsetHeight; // Force reflow
+                newEl.classList.remove('fade');
+              }
+            }, 150);
+          } else {
+            const isVideo = newSrc && newSrc.toLowerCase().endsWith('.mp4');
+            if (isVideo) {
+              mainDisplay.innerHTML = `<video src="${newSrc}" autoplay loop muted playsinline></video>`;
+            } else {
+              mainDisplay.innerHTML = `<img src="${newSrc}" alt="Gallery Image" loading="lazy" />`;
+            }
+          }
         });
       });
     });
@@ -367,107 +389,9 @@
       }
     }, { passive: true });
 
-    /* ─── Slideshow Data ──────────────────────────────── */
-    const slides = [
-      { src: 'Images/Index_Slideshow/MainMenuBG.png',           caption: 'Game Dev' },
-      { src: 'Images/Index_Slideshow/main menu bg.png',         caption: 'UI Design' },
-      { src: 'Images/Index_Slideshow/TITLECARD (1).png',        caption: 'Title Card Art' },
-      { src: 'Images/Index_Slideshow/Screenshot 2026-03-20 232829.png', caption: 'Project Showcase' },
-      { src: 'Images/Index_Slideshow/UnderMyBlanketDigi.jpg',   caption: 'Digital Art' },
-      { src: 'Images/Index_Slideshow/Customer ID Thumbnail.png',caption: 'Multimedia' },
-    ];
 
-    const INTERVAL = 3000;
-    const container   = document.getElementById('slides-container');
-    const dotWrap     = document.getElementById('dot-container');
-    const progressBar = document.getElementById('progress-bar');
-    const captionEl   = document.getElementById('slide-caption-text');
 
-    let current = 0;
 
-    if (container) {
-      const slideEls = slides.map((s, i) => {
-        const el = document.createElement('div');
-        el.className = 'slide' + (i === 0 ? ' active' : '');
-        el.style.backgroundImage = `url('${s.src}')`;
-        el.setAttribute('role', 'img');
-        el.setAttribute('aria-label', s.caption);
-        container.appendChild(el);
-        return el;
-      });
-
-      const dots = slides.map((_, i) => {
-        const btn = document.createElement('button');
-        btn.className = 'dot' + (i === 0 ? ' active' : '');
-        btn.setAttribute('role', 'tab');
-        btn.setAttribute('aria-label', `Slide ${i + 1}`);
-        btn.addEventListener('click', () => goTo(i));
-        if (dotWrap) dotWrap.appendChild(btn);
-        return btn;
-      });
-
-      function startProgress() {
-        if (!progressBar) return;
-        progressBar.style.transition = 'none';
-        progressBar.style.width = '0%';
-        requestAnimationFrame(() => requestAnimationFrame(() => {
-          progressBar.style.transition = `width ${INTERVAL}ms linear`;
-          progressBar.style.width = '100%';
-        }));
-      }
-
-      function goTo(index) {
-        const next = (index + slides.length) % slides.length;
-        if (next === current) return;
-
-        // Deactivate old slide
-        slideEls[current].classList.remove('active');
-        slideEls[current].classList.add('exit');
-        dots[current].classList.remove('active');
-        const old = slideEls[current];
-        setTimeout(() => old.classList.remove('exit'), 1000);
-
-        current = next;
-        slideEls[current].classList.add('active');
-        dots[current].classList.add('active');
-        if (captionEl) captionEl.textContent = slides[current].caption;
-        startProgress();
-      }
-
-      if (captionEl) captionEl.textContent = slides[0].caption;
-
-      // Un-stoppable auto-advance
-      setInterval(() => goTo(current + 1), INTERVAL);
-      startProgress();
-    }
-
-    /* ── Init Particles ───────────────────────────────── */
-    const pContainer = document.getElementById('particles-container');
-    const PARTICLE_COUNT = 80;
-
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      const p = document.createElement('div');
-      p.classList.add('particle');
-      
-      // Randomize starting position
-      p.style.left = Math.random() * 100 + 'vw';
-      p.style.top = Math.random() * 100 + 'vh';
-      
-      // Randomize animation duration and delay
-      const dur = 4 + Math.random() * 6; // 4s to 10s
-      const delay = Math.random() * 8; // 0s to 8s
-      
-      // Some vary slightly in size
-      const size = Math.random() * 2 + 1; // 1px to 3px
-      p.style.width = size + 'px';
-      p.style.height = size + 'px';
-      
-      // Slight vertical drift distance logic (done using top modification in keyframes would be hard, so just translate heavily)
-      // Actually we will use a custom keyframe generated programmatically or just rely on CSS
-      p.style.animation = `particleFloat ${dur}s linear ${delay}s infinite`;
-
-      pContainer.appendChild(p);
-    }
 
     /* ── ScrollSpy (Active Navbar Links) ─────────────── */
     const sections = document.querySelectorAll('section');
@@ -507,86 +431,7 @@
         }
       });
     }, { passive: true });
-    /* ─── WebGL Liquid Shader (Black, Orange, Purple) ─ */
-    const canvas = document.getElementById('glcanvas');
-    if (canvas) {
-      const gl = canvas.getContext('webgl');
-      function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        gl.viewport(0, 0, canvas.width, canvas.height);
-      }
-      window.addEventListener('resize', resizeCanvas);
-      resizeCanvas();
-      const vsSource = `attribute vec4 aVertexPosition; void main() { gl_Position = aVertexPosition; }`;
-      const fsSource = `
-        precision highp float;
-        uniform vec2 u_resolution;
-        uniform float u_time;
-        vec2 hash(vec2 p) {
-          p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
-          return -1.0 + 2.0 * fract(sin(p) * 43758.5453123);
-        }
-        float noise(vec2 p) {
-          const float K1 = 0.366025404; const float K2 = 0.211324865;
-          vec2 i = floor(p + (p.x + p.y) * K1); vec2 a = p - i + (i.x + i.y) * K2;
-          float m = step(a.y, a.x); vec2 o = vec2(m, 1.0 - m);
-          vec2 b = a - o + K2; vec2 c = a - 1.0 + 2.0 * K2;
-          vec3 h = max(0.5 - vec3(dot(a,a), dot(b,b), dot(c,c)), 0.0);
-          vec3 n = h*h*h*h * vec3(dot(a, hash(i+0.0)), dot(b, hash(i+o)), dot(c, hash(i+1.0)));
-          return dot(n, vec3(70.0));
-        }
-        float fbm(vec2 uv) {
-          float f = 0.0; mat2 m = mat2(1.6, 1.2, -1.2, 1.6);
-          f += 0.5000 * noise(uv); uv = m * uv; f += 0.2500 * noise(uv); uv = m * uv;
-          f += 0.1250 * noise(uv); uv = m * uv; f += 0.0625 * noise(uv); uv = m * uv;
-          return f;
-        }
-        void main() {
-          vec2 st = gl_FragCoord.xy / u_resolution.y;
-          vec2 q = vec2(0.); q.x = fbm(st + 0.02 * u_time); q.y = fbm(st + vec2(1.0));
-          vec2 r = vec2(0.);
-          r.x = fbm(st + 1.0 * q + vec2(1.7, 9.2) + 0.12 * u_time);
-          r.y = fbm(st + 1.0 * q + vec2(8.3, 2.8) + 0.10 * u_time);
-          float f = fbm(st + r);
-          float veins = abs(sin(f * 3.0 + u_time * 0.3));
-          veins = smoothstep(0.93, 1.0, veins); 
-          float faintVeins = smoothstep(0.85, 1.0, abs(sin(f * 6.0 - u_time * 0.1))) * 0.2;
-          float fluid = veins + faintVeins;
-          vec3 baseColor = vec3(0.01, 0.01, 0.01);
-          vec3 orangeColor = vec3(1.0, 0.4, 0.0);
-          vec3 purpleColor = vec3(0.6, 0.1, 0.9);
-          vec3 col = mix(baseColor, orangeColor, fluid);
-          col = mix(col, purpleColor, smoothstep(0.97, 1.0, abs(sin(f * 3.0 + u_time * 0.3))));
-          col *= 0.55; 
-          vec2 center = gl_FragCoord.xy / u_resolution.xy - 0.5;
-          col *= 1.0 - dot(center, center) * 1.5;
-          gl_FragColor = vec4(col, 1.0);
-        }
-      `;
-      function loadShader(gl, type, source) {
-        const shader = gl.createShader(type); gl.shaderSource(shader, source); gl.compileShader(shader);
-        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) return null;
-        return shader;
-      }
-      const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vsSource);
-      const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
-      const shaderProgram = gl.createProgram();
-      gl.attachShader(shaderProgram, vertexShader); gl.attachShader(shaderProgram, fragmentShader);
-      gl.linkProgram(shaderProgram); gl.useProgram(shaderProgram);
-      const positionBuffer = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-      const positions = [ -1.0, 1.0, 1.0, 1.0, -1.0, -1.0, 1.0, -1.0 ];
-      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
-      const vertexPosition = gl.getAttribLocation(shaderProgram, 'aVertexPosition');
-      gl.vertexAttribPointer(vertexPosition, 2, gl.FLOAT, false, 0, 0); gl.enableVertexAttribArray(vertexPosition);
-      const uResolution = gl.getUniformLocation(shaderProgram, 'u_resolution'); const uTime = gl.getUniformLocation(shaderProgram, 'u_time');
-      let startTime = Date.now();
-      function renderGL() {
-        gl.uniform2f(uResolution, canvas.width, canvas.height); gl.uniform1f(uTime, (Date.now() - startTime) / 1000.0);
-        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); requestAnimationFrame(renderGL);
-      }
-      renderGL();
-    }
+
   </script>
 
 </body>
